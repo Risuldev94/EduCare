@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#e0e8ff", "outline-variant": "#c2c6d8", "primary-fixed": "#dbe1ff", "on-tertiary": "#ffffff", "text-muted": "#98a2b3", "on-primary-fixed": "#001849", "secondary-fixed": "#dde1ff", "secondary": "#515b8e", "secondary-container": "#bac3fd", "inverse-on-surface": "#edf0ff", "warning-light": "#fffbeb", "tertiary-fixed": "#ffdbcf", "surface": "#ffffff", "outline": "#737687", "divider": "#eaecf0", "inverse-primary": "#b3c5ff", "surface-container-highest": "#dbe2f9", "on-surface-variant": "#424655", "background": "#f7f9fc", "secondary-fixed-dim": "#bac3fd", "on-tertiary-fixed": "#380d00", "warning": "#f59e0b", "on-background": "#141b2c", "tertiary-fixed-dim": "#ffb59a", "tertiary": "#a43700", "text-primary": "#101828", "text-secondary": "#667085", "surface-bright": "#f9f9ff", "surface-dim": "#d2daf0", "inverse-surface": "#293041", "success-light": "#ecfdf5", "accent-orange": "#ea580c", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#802900", "error-container": "#ffdad6", "on-surface": "#141b2c", "error": "#ef3340", "tertiary-container": "#cd4700", "primary": "#0052d1", "surface-container-lowest": "#ffffff", "accent-purple": "#7c3aed", "primary-fixed-dim": "#b3c5ff", "on-secondary-fixed-variant": "#394375", "on-error-container": "#93000a", "accent-purple-light": "#f5f3ff", "surface-container": "#e9edff", "border": "#e4e7ec", "error-light": "#fef2f2", "primary-container": "#1769ff", "on-primary-fixed-variant": "#003fa5", "surface-variant": "#dbe2f9", "accent-orange-light": "#fff7ed", "surface-container-low": "#f1f3ff", "success": "#16a34a", "on-tertiary-container": "#fffbff", "on-secondary-container": "#454f81", "on-secondary": "#ffffff", "surface-tint": "#0054d7", "on-error": "#ffffff", "on-secondary-fixed": "#0b1747", "on-primary-container": "#fefbff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1rem", "space-2xl": "1.5rem", "margin-tablet": "1.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-md": "0.75rem", "space-lg": "1rem", "space-xl": "1.25rem" }, "fontFamily": { "headline-lg": ["Inter"], "body-lg": ["Inter"], "body-md": ["Inter"], "headline-md": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "headline-sm": ["Inter"] }, "fontSize": { "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-text-primary flex flex-col antialiased"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-[22px]">school</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary leading-tight">EduCare</span><span class="font-label-sm text-label-sm text-text-secondary leading-none">Announcements</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center rounded-full text-text-secondary hover:text-text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 flex h-4 w-4 items-center justify-center rounded-full bg-error text-[10px] font-bold text-on-error">3</span></button><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1XnxbARdnLQnf4oLcMR432n_CBHLUTa26BF0mYP8DDMYwcM13ESHxZ091l7b9grWxNVHR5rKsaHJVqna1xLLRockFQvNxG6ZKnK827cTfXHNOEvO0OCxOciXX3WqpSzqFtxWqslMWGCY5diK0dSP5jAMgQfeBlCOZHCH6iRNfImxJAF4wjgscXKm6ORnVwVb1PdwHHj4T4qTMRFleo1tmsYD4F7h_nQ4MV9CbtP3VE8O9VhXbOu97NKnAYzWbBm3UpkYiEbKX9J1SQ"/></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full pb-24">
+<!-- Top Context & Interactive Search Header -->
+<section class="px-margin pt-space-md pb-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline-md text-headline-md text-text-primary tracking-tight">Announcements</h1>
+<p class="font-body-md text-text-secondary text-label-md">Stay informed. Never miss an update for your child.</p>
+</div>
+<button aria-label="Toggle Search" class="w-10 h-10 rounded-full bg-surface shadow-sm flex items-center justify-center text-text-secondary active:scale-95 transition-transform" id="toggle-search-btn">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+<!-- Collapsible Search Input Field -->
+<div class="relative w-full hidden transition-all duration-200" id="search-container">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-text-muted">search</span>
+<input class="w-full h-11 pl-10 pr-10 bg-surface rounded-xl font-body-md text-text-primary placeholder:text-text-muted shadow-sm focus:outline-none focus:bg-surface-container-low transition-colors" id="announcement-search" placeholder="Search notices, exams, routes..." type="text"/>
+<button aria-label="Clear Search" class="hidden absolute right-3 text-text-muted hover:text-text-primary" id="clear-search-btn">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</div>
+<!-- Active Student Quick Selector Context -->
+<div class="flex items-center justify-between px-space-md py-space-xs bg-surface rounded-xl shadow-sm mt-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-primary-container/15 flex items-center justify-center text-primary-container text-[12px] font-bold">
+          LS
+        </div>
+<div class="flex flex-col">
+<span class="font-label-sm text-text-primary font-semibold leading-tight">Leo Sharma</span>
+<span class="font-label-sm text-text-secondary text-[11px] leading-tight">Class 6-B • Roll #18</span>
+</div>
+</div>
+<span class="font-label-sm text-primary-container font-semibold bg-primary-fixed/50 px-2 py-0.5 rounded-full text-[11px]">Primary View</span>
+</div>
+</section>
+<!-- Horizontal Filter Pills (Scrollable) -->
+<section class="w-full overflow-x-auto no-scrollbar py-space-xs px-margin flex items-center gap-space-xs">
+<button class="filter-chip flex items-center gap-1.5 px-4 py-2 rounded-full font-label-md transition-all shrink-0 bg-primary-container text-on-primary shadow-sm font-semibold" data-filter="all">
+<span>All</span>
+<span class="bg-white/25 px-1.5 py-0.2 rounded-full text-[11px]">6</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md transition-all shrink-0 bg-surface text-text-secondary shadow-sm active:scale-95" data-filter="important">
+<span class="material-symbols-outlined text-error text-[18px]">error</span>
+<span>Important</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md transition-all shrink-0 bg-surface text-text-secondary shadow-sm active:scale-95" data-filter="academic">
+<span class="material-symbols-outlined text-accent-purple text-[18px]">school</span>
+<span>Academic</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md transition-all shrink-0 bg-surface text-text-secondary shadow-sm active:scale-95" data-filter="transport">
+<span class="material-symbols-outlined text-success text-[18px]">directions_bus</span>
+<span>Transport</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md transition-all shrink-0 bg-surface text-text-secondary shadow-sm active:scale-95" data-filter="general">
+<span class="material-symbols-outlined text-accent-orange text-[18px]">campaign</span>
+<span>General</span>
+</button>
+</section>
+<!-- Announcements Stream List -->
+<section class="px-margin pt-space-sm flex flex-col gap-space-md" id="announcements-container">
+<!-- 1. Urgent / Holiday Notice (Soft Red Tint) -->
+<article class="notice-card group relative p-space-lg rounded-2xl bg-error-light shadow-[0_2px_10px_rgba(16,24,40,0.06)] flex flex-col gap-space-sm transition-transform active:scale-[0.99] cursor-pointer" data-category="important">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-error flex items-center justify-center text-on-error shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">priority_high</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="px-2.5 py-0.5 rounded-full bg-error/15 font-label-sm text-error font-bold tracking-wide text-[11px] uppercase">
+              Important
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-error text-on-error font-label-sm font-semibold text-[10px] tracking-wider uppercase">
+              New
+            </span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-text-muted shrink-0">
+<span class="font-label-sm text-text-secondary text-[12px]">2 hours ago</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col pl-[52px]">
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-snug">School will remain closed on 10th September</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1 leading-relaxed">
+          Dear Parents, Please note that the school will remain closed on Wednesday, 10th September 2026, due to a public holiday on account of Vinayaka Chaturthi.
+        </p>
+</div>
+</article>
+<!-- 2. Academic / Exam Timetable Card (Soft Blue / Purple Tint with Download Pill) -->
+<article class="notice-card group relative p-space-lg rounded-2xl bg-surface-container-low shadow-[0_2px_10px_rgba(16,24,40,0.06)] flex flex-col gap-space-sm transition-transform active:scale-[0.99] cursor-pointer" data-category="academic">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary-container/15 flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[22px]">school</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container/15 font-label-sm text-primary-container font-bold tracking-wide text-[11px] uppercase">
+            Academic
+          </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted shrink-0">
+<span class="font-label-sm text-text-secondary text-[12px]">5 hours ago</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col pl-[52px] gap-space-sm">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-snug">Term 1 Exam Timetable Released</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1 leading-relaxed">
+            The Term 1 examination timetable for Classes 1 to 10 is now available. Please check the full schedule in the attached document.
+          </p>
+</div>
+<!-- Attachment Download Pill -->
+<div class="flex items-center justify-between px-space-md py-space-sm bg-surface rounded-xl shadow-sm mt-space-xs hover:bg-surface-container transition-colors" onclick="event.stopPropagation(); alert('Downloading Term_1_Timetable_2026.pdf...');">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-lg bg-error-light flex items-center justify-center text-error shrink-0">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-text-primary font-medium truncate">Term_1_Timetable_2026.pdf</span>
+<span class="font-label-sm text-text-muted text-[11px]">1.2 MB • PDF document</span>
+</div>
+</div>
+<button aria-label="Download Timetable" class="w-8 h-8 rounded-full flex items-center justify-center text-primary-container hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</article>
+<!-- 3. Transport Update Card (Soft Green Tint) -->
+<article class="notice-card group relative p-space-lg rounded-2xl bg-success-light/60 shadow-[0_2px_10px_rgba(16,24,40,0.06)] flex flex-col gap-space-sm transition-transform active:scale-[0.99] cursor-pointer" data-category="transport">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-success/15 flex items-center justify-center text-success shrink-0">
+<span class="material-symbols-outlined text-[22px]">directions_bus</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-success/15 font-label-sm text-success font-bold tracking-wide text-[11px] uppercase">
+            Transport
+          </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted shrink-0">
+<span class="font-label-sm text-text-secondary text-[12px]">1 day ago</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col pl-[52px]">
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-snug">Route 12 Timing Change</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1 leading-relaxed">
+          Please note that Route 12 (Whitefield) will have a revised pick-up time from 7th September. The new pick-up time is 7:10 AM (10 minutes earlier).
+        </p>
+</div>
+</article>
+<!-- 4. General Meeting Notice (Soft Amber / Orange Tint) -->
+<article class="notice-card group relative p-space-lg rounded-2xl bg-accent-orange-light/60 shadow-[0_2px_10px_rgba(16,24,40,0.06)] flex flex-col gap-space-sm transition-transform active:scale-[0.99] cursor-pointer" data-category="general">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-accent-orange/15 flex items-center justify-center text-accent-orange shrink-0">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-accent-orange/15 font-label-sm text-accent-orange font-bold tracking-wide text-[11px] uppercase">
+            General
+          </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted shrink-0">
+<span class="font-label-sm text-text-secondary text-[12px]">2 days ago</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col pl-[52px]">
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-snug">Parent-Teacher Meeting</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1 leading-relaxed">
+          The Parent-Teacher Meeting (PTM) for Classes 1 to 8 will be held on 14th September 2026, from 9:00 AM to 1:00 PM. We look forward to your participation.
+        </p>
+</div>
+</article>
+<!-- 5. Academic Result Declaration Card (Soft Purple Tint) -->
+<article class="notice-card group relative p-space-lg rounded-2xl bg-accent-purple-light/60 shadow-[0_2px_10px_rgba(16,24,40,0.06)] flex flex-col gap-space-sm transition-transform active:scale-[0.99] cursor-pointer" data-category="academic">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-accent-purple/15 flex items-center justify-center text-accent-purple shrink-0">
+<span class="material-symbols-outlined text-[22px]">assignment_turned_in</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-accent-purple/15 font-label-sm text-accent-purple font-bold tracking-wide text-[11px] uppercase">
+            Academic
+          </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted shrink-0">
+<span class="font-label-sm text-text-secondary text-[12px]">3 days ago</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col pl-[52px]">
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-snug">Results Declared – Unit Test 2</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1 leading-relaxed">
+          The results for Unit Test 2 are now available. Please check the Results section for detailed marks, subject-wise percentiles, and teacher feedback.
+        </p>
+</div>
+</article>
+<!-- 6. General Library Notice (Crisp Surface with Soft Gray/Slate Icon) -->
+<article class="notice-card group relative p-space-lg rounded-2xl bg-surface shadow-[0_2px_10px_rgba(16,24,40,0.06)] flex flex-col gap-space-sm transition-transform active:scale-[0.99] cursor-pointer" data-category="general">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">local_library</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container font-label-sm text-secondary font-bold tracking-wide text-[11px] uppercase">
+            General
+          </span>
+</div>
+<div class="flex items-center gap-1 text-text-muted shrink-0">
+<span class="font-label-sm text-text-secondary text-[12px]">5 days ago</span>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</div>
+</div>
+<div class="flex flex-col pl-[52px]">
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold leading-snug">New Library Books Added</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1 leading-relaxed">
+          We're excited to inform you that new STEM journals and adventure fiction books have been added to the school library. Encourage your child to explore and read!
+        </p>
+</div>
+</article>
+</section>
+<!-- Delightful Empty State (Shown when search/filter returns zero matches) -->
+<div class="hidden flex-col items-center justify-center px-margin py-12 text-center" id="empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-text-muted mb-space-sm">
+<span class="material-symbols-outlined text-[32px]">drafts</span>
+</div>
+<h3 class="font-headline-sm text-text-primary font-semibold">No announcements found</h3>
+<p class="font-body-md text-text-secondary max-w-xs mt-1">There are no updates in this category right now. You are all caught up!</p>
+<button class="mt-space-md px-4 py-2 bg-primary-container text-on-primary font-label-md rounded-xl shadow-sm" id="reset-filter-btn">
+      Show All Notices
+    </button>
+</div>
+</div>
+<script>
+  (function () {
+    const filterButtons = document.querySelectorAll('.filter-chip');
+    const cards = document.querySelectorAll('.notice-card');
+    const emptyState = document.getElementById('empty-state');
+    const resetBtn = document.getElementById('reset-filter-btn');
+    const toggleSearchBtn = document.getElementById('toggle-search-btn');
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = document.getElementById('announcement-search');
+    const clearSearchBtn = document.getElementById('clear-search-btn');
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function applyFilters() {
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const textContent = card.innerText.toLowerCase();
+
+        const matchesCat = (activeCategory === 'all' || cat === activeCategory);
+        const matchesSearch = (!searchQuery || textContent.includes(searchQuery));
+
+        if (matchesCat && matchesSearch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+    }
+
+    // Filter Chips Event Handlers
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.className = 'filter-chip flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md transition-all shrink-0 bg-surface text-text-secondary shadow-sm active:scale-95';
+        });
+
+        btn.className = 'filter-chip flex items-center gap-1.5 px-4 py-2 rounded-full font-label-md transition-all shrink-0 bg-primary-container text-on-primary shadow-sm font-semibold';
+
+        activeCategory = btn.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    // Reset Filter Button Action
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        const allBtn = document.querySelector('[data-filter="all"]');
+        if (allBtn) allBtn.click();
+        if (searchInput) {
+          searchInput.value = '';
+          searchQuery = '';
+          clearSearchBtn.classList.add('hidden');
+        }
+        applyFilters();
+      });
+    }
+
+    // Toggle Search Bar Visibility
+    if (toggleSearchBtn) {
+      toggleSearchBtn.addEventListener('click', () => {
+        const isHidden = searchContainer.classList.contains('hidden');
+        if (isHidden) {
+          searchContainer.classList.remove('hidden');
+          searchInput.focus();
+        } else {
+          searchContainer.classList.add('hidden');
+          searchInput.value = '';
+          searchQuery = '';
+          clearSearchBtn.classList.add('hidden');
+          applyFilters();
+        }
+      });
+    }
+
+    // Search Input Real-time Filtering
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        if (searchQuery.length > 0) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+        applyFilters();
+      });
+    }
+
+    // Clear Search Field
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        clearSearchBtn.classList.add('hidden');
+        searchInput.focus();
+        applyFilters();
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(16,24,40,0.06)]" data-active-classes="text-primary-container font-semibold"><div class="flex items-center justify-between h-16 px-space-xs"><a class="flex flex-col items-center justify-center flex-1 h-full gap-[3px] text-text-muted hover:text-text-primary transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center flex-1 h-full gap-[3px] text-text-muted hover:text-text-primary transition-colors" data-path="transport" href="#"><span class="material-symbols-outlined text-[22px]">directions_bus</span><span class="font-label-sm text-label-sm">Transport</span></a><a class="flex flex-col items-center justify-center flex-1 h-full gap-[3px] text-text-muted hover:text-text-primary transition-colors" data-path="attendance" href="#"><span class="material-symbols-outlined text-[22px]">calendar_today</span><span class="font-label-sm text-label-sm">Attendance</span></a><a class="flex flex-col items-center justify-center flex-1 h-full gap-[3px] text-text-muted hover:text-text-primary transition-colors" data-path="results" href="#"><span class="material-symbols-outlined text-[22px]">bar_chart</span><span class="font-label-sm text-label-sm">Results</span></a><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full gap-[3px] transition-colors text-primary-container font-semibold" data-path="announcements" href="#"><span class="material-symbols-outlined text-[22px]">campaign</span><span class="font-label-sm text-label-sm">Notices</span></a></div></nav></body></html>

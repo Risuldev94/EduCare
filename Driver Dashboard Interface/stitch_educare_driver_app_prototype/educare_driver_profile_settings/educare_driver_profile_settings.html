@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary": "#ffffff", "secondary": "#006e2d", "on-surface-variant": "#434655", "on-tertiary-fixed-variant": "#653e00", "alert-coral-surface": "#FEE2E2", "warning-amber-surface": "#FEF3C7", "error": "#ba1a1a", "surface-container-highest": "#dae2fd", "surface-container": "#eaedff", "border-subtle": "#E2E8F0", "on-primary-fixed-variant": "#003ea8", "on-tertiary": "#ffffff", "warning-amber-text": "#B45309", "success-green-text": "#15803D", "text-secondary": "#475569", "primary-container": "#2563eb", "outline": "#737686", "inverse-on-surface": "#eef0ff", "on-surface": "#131b2e", "background": "#faf8ff", "secondary-fixed": "#7ffc97", "primary-fixed-dim": "#b4c5ff", "on-primary-container": "#eeefff", "primary-fixed": "#dbe1ff", "on-secondary-fixed-variant": "#005320", "surface-container-high": "#e2e7ff", "surface": "#faf8ff", "on-error-container": "#93000a", "tertiary-container": "#996100", "error-container": "#ffdad6", "on-error": "#ffffff", "on-tertiary-fixed": "#2a1700", "secondary-container": "#7cf994", "vehicle-amber": "#FBBF24", "tertiary": "#784b00", "alert-coral-vivid": "#EF4444", "secondary-fixed-dim": "#62df7d", "outline-variant": "#c3c6d7", "text-tertiary": "#94A3B8", "surface-card": "#FFFFFF", "tertiary-fixed": "#ffddb8", "brand-blue-surface": "#EFF6FF", "on-background": "#131b2e", "inverse-surface": "#283044", "surface-container-lowest": "#ffffff", "surface-bright": "#faf8ff", "on-secondary-fixed": "#002109", "surface-dim": "#d2d9f4", "on-tertiary-container": "#ffeedd", "alert-coral-text": "#B91C1C", "canvas-bg": "#F8FAFC", "inverse-primary": "#b4c5ff", "tertiary-fixed-dim": "#ffb95f", "surface-tint": "#0053db", "success-green-vivid": "#16A34A", "text-primary": "#0F172A", "on-secondary-container": "#007230", "surface-subtle": "#F1F5F9", "primary": "#004ac6", "success-green-surface": "#DCFCE7", "on-primary-fixed": "#00174b", "on-secondary": "#ffffff", "surface-container-low": "#f2f3ff", "surface-variant": "#dae2fd" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1rem", "space-sm": "0.5rem", "space-xl": "1.25rem", "space-lg": "1rem", "space-md": "0.75rem", "space-xs": "0.25rem", "gutter": "0.75rem", "space-2xl": "1.5rem" }, "fontFamily": { "metric-display": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "metric-display": ["20px", { "lineHeight": "24px", "fontWeight": "800" }], "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-sm": ["16px", { "lineHeight": "22px", "fontWeight": "700" }], "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }], "headline-xl": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100vw;min-height:100vh;margin:0;padding:0;background-color:#F8FAFC;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-canvas-bg font-body-md text-body-md text-text-primary flex flex-col antialiased min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface-card/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-brand-blue-surface flex items-center justify-center"><span class="material-symbols-outlined text-primary-container text-[20px]">directions_bus</span></div><h1 class="font-headline-md text-headline-md text-text-primary tracking-tight">Profile</h1></div><div class="flex items-center gap-space-sm"><button aria-label="Notifications" class="w-11 h-11 rounded-full flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-canvas-bg min-h-screen"><div class="flex flex-col w-full px-margin pb-8 space-y-space-lg">
+<!-- Profile Page Header Bar -->
+<div class="flex items-center justify-between pt-space-xs">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Profile</h2>
+<p class="font-body-sm text-body-sm text-text-secondary">Your details and app settings</p>
+</div>
+<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-card shadow-sm text-primary font-label-md text-label-md hover:bg-brand-blue-surface transition-colors active:scale-95" id="helpSupportBtn">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span>Help &amp; Support</span>
+</button>
+</div>
+<!-- Driver Profile Summary Card -->
+<div class="w-full bg-surface-card rounded-xl p-space-lg shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-md">
+<!-- Friendly Driver Avatar -->
+<div class="relative w-16 h-16 rounded-full bg-brand-blue-surface flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Friendly male school bus driver avatar named Ravi Kumar with a warm smile, neat mustache, short dark hair, wearing a crisp driver uniform polo, stylized clean modern vector 3d character portrait with soft lighting and subtle blue circular backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcyEFJ8bKFsOkcsQukYC0KJ_QeZKMcRsiBonKjFAQVx_HSOb8F1vuykVLXw8-llGz6--TblbwAbLCHndqOxnJp0TBfmkw3uKxqyFcYrCCn3e1ZPW78KC2u5TPbql7cdMYXNXofNzalEXCpQ1rvEShJoW4BtNwmCQwnFXXc47-Ftmdmld28kN_yQgwWTDJOUudnCasoHktPzaGCaxNp2Ya_aoc9xlC1TZxoGccQ_6uHldSo-5v6hukO"/>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-headline-md text-headline-md text-text-primary truncate">Ravi Kumar</h3>
+<span class="font-body-sm text-body-sm text-text-secondary font-medium">Driver</span>
+<span class="font-label-sm text-label-sm text-text-tertiary mt-0.5">Employee ID: DRV1024</span>
+<!-- Status Pill -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 mt-2 rounded-full bg-success-green-surface w-fit">
+<span class="w-2 h-2 rounded-full bg-success-green-vivid animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-success-green-text font-bold">Active</span>
+</div>
+</div>
+</div>
+<!-- Edit Profile Button -->
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-full bg-brand-blue-surface text-primary-container font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95 shrink-0" id="editProfileBtn">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Edit Profile</span>
+</button>
+</div>
+</div>
+<!-- Assigned Details Group -->
+<div class="space-y-2">
+<h4 class="font-headline-sm text-headline-sm text-text-primary px-1">Assigned Details</h4>
+<div class="w-full bg-surface-card rounded-xl shadow-sm overflow-hidden divide-y-0">
+<!-- Vehicle Item -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-brand-blue-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container text-[22px]">directions_bus</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-tertiary">Vehicle</span>
+<span class="font-headline-sm text-headline-sm text-text-primary truncate">KA 01 AB 1234</span>
+<span class="font-body-sm text-body-sm text-text-secondary truncate">School Van (Tata Winger)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- Assigned Route Item -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-success-green-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-success-green-text text-[22px]">alt_route</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-tertiary">Assigned Route</span>
+<span class="font-headline-sm text-headline-sm text-text-primary truncate">Route 12</span>
+<span class="font-body-sm text-body-sm text-text-secondary truncate">Whitefield - School</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- School Item -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[22px]">shield</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-tertiary">School</span>
+<span class="font-headline-sm text-headline-sm text-text-primary truncate">Greenwood Public School</span>
+<span class="font-body-sm text-body-sm text-text-secondary truncate">Whitefield, Bengaluru</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- App Settings Group -->
+<div class="space-y-2">
+<h4 class="font-headline-sm text-headline-sm text-text-primary px-1">App Settings</h4>
+<div class="w-full bg-surface-card rounded-xl shadow-sm overflow-hidden">
+<!-- Notifications -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-brand-blue-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container text-[22px]">notifications</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-text-primary truncate">Notifications</span>
+<span class="font-body-sm text-body-sm text-text-secondary truncate">Delay alerts, trip updates, and important messages</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- Language -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-success-green-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-success-green-text text-[22px]">language</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-text-primary truncate">Language</span>
+<span class="font-body-sm text-body-sm text-text-secondary">English</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- Appearance -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[22px]">dark_mode</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-text-primary truncate">Appearance</span>
+<span class="font-body-sm text-body-sm text-text-secondary">System Default</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- Location & Permissions (Interactive Trigger) -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group" id="openLocationModalBtn">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-warning-amber-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-warning-amber-text text-[22px]">location_on</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-body-lg text-body-lg text-text-primary truncate">Location &amp; Permissions</span>
+<span class="w-2 h-2 rounded-full bg-success-green-vivid"></span>
+</div>
+<span class="font-body-sm text-body-sm text-text-secondary truncate">Location sharing enabled • Auto-detect ON</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-primary font-bold">Configure</span>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Account Group -->
+<div class="space-y-2">
+<h4 class="font-headline-sm text-headline-sm text-text-primary px-1">Account</h4>
+<div class="w-full bg-surface-card rounded-xl shadow-sm overflow-hidden">
+<!-- Change Password -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-alert-coral-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-alert-coral-text text-[22px]">lock</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-text-primary truncate">Change Password</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- About App -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-surface-subtle transition-colors text-left group">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-brand-blue-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary-container text-[22px]">info</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-text-primary truncate">About EduCare Driver App</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Version 1.0.0</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-tertiary group-hover:text-text-primary transition-colors text-[20px]">chevron_right</span>
+</button>
+<!-- Logout -->
+<button class="w-full flex items-center justify-between p-space-md hover:bg-alert-coral-surface/40 transition-colors text-left group" id="logoutBtn">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-10 h-10 rounded-full bg-alert-coral-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-alert-coral-vivid text-[22px]">logout</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-alert-coral-vivid font-bold truncate">Logout</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-alert-coral-vivid group-hover:translate-x-0.5 transition-transform text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Safety Compliance Footnote -->
+<div class="flex items-center justify-center gap-1.5 pt-2 text-center text-text-tertiary">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-label-sm text-label-sm">EduCare SafeTransit Security Standard • GPS Verified</span>
+</div>
+<!-- Interactive Slide-Up Modal: Location & Geofence Settings (Section 12 spec) -->
+<div class="fixed inset-0 z-50 flex flex-col justify-end bg-inverse-surface/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="locationModal">
+<div class="absolute inset-0" id="modalBackdrop"></div>
+<div class="relative z-10 w-full bg-surface-card rounded-t-2xl shadow-xl max-h-[751px] flex flex-col transform translate-y-full transition-transform duration-300 ease-out" id="modalSheet">
+<!-- Modal Header -->
+<div class="p-space-lg flex items-center justify-between bg-surface-card rounded-t-2xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-warning-amber-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-warning-amber-text text-[22px]">location_on</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Location &amp; Geofence</h3>
+<p class="font-body-sm text-body-sm text-text-secondary">Manage real-time tracking parameters</p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-subtle flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors" id="closeLocationModalBtn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable) -->
+<div class="p-space-lg overflow-y-auto space-y-space-md">
+<!-- Settings Toggles Container -->
+<div class="bg-surface-subtle rounded-xl p-space-md space-y-space-md">
+<!-- Toggle 1: Use GPS Location -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col pr-4">
+<span class="font-body-lg text-body-lg text-text-primary">Use GPS Location</span>
+<span class="font-body-sm text-body-sm text-text-secondary">High-accuracy satellite tracking for safety</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleGps" type="checkbox"/>
+<div class="w-12 h-6 bg-border-subtle peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 2: Auto-detect Stops -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col pr-4">
+<span class="font-body-lg text-body-lg text-text-primary">Auto-detect Stops</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Automatically opens boarding when arriving at a stop</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleAutoDetect" type="checkbox"/>
+<div class="w-12 h-6 bg-border-subtle peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Radius Slider / Control -->
+<div class="space-y-2 pt-1">
+<div class="flex items-center justify-between">
+<span class="font-body-lg text-body-lg text-text-primary">Detection Radius</span>
+<span class="font-label-lg text-label-lg text-primary-container bg-brand-blue-surface px-2.5 py-0.5 rounded-full" id="radiusValue">100m</span>
+</div>
+<input class="w-full h-2 bg-border-subtle rounded-lg appearance-none cursor-pointer accent-primary-container" id="radiusSlider" max="250" min="50" step="25" type="range" value="100"/>
+<div class="flex justify-between text-label-sm text-text-tertiary">
+<span>50m (Tight)</span>
+<span>100m (Recommended)</span>
+<span>250m (Wide)</span>
+</div>
+</div>
+<!-- Toggle 3: Show Live Location -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col pr-4">
+<span class="font-body-lg text-body-lg text-text-primary">Live Location to Parents &amp; School</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Allows parents to anticipate bus arrival</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleLiveShare" type="checkbox"/>
+<div class="w-12 h-6 bg-border-subtle peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 4: Save Locations -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col pr-4">
+<span class="font-body-lg text-body-lg text-text-primary">Save Locations for Future Trips</span>
+<span class="font-body-sm text-body-sm text-text-secondary">Caches geofenced points for offline sync</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="toggleSaveLoc" type="checkbox"/>
+<div class="w-12 h-6 bg-border-subtle peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Saved Locations Summary (Design.md Section 12) -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-text-primary">Active Geofenced Stops</span>
+<span class="font-label-sm text-label-sm text-success-green-text bg-success-green-surface px-2 py-0.5 rounded-full font-bold">Synced</span>
+</div>
+<div class="space-y-2">
+<!-- Stop 1 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-subtle">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-blue-surface flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold text-text-primary">Greenwood Layout</p>
+<p class="font-label-sm text-label-sm text-text-secondary">Pickup • 3 students</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">100m zone</span>
+</div>
+<!-- Stop 2 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-subtle">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-brand-blue-surface flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold text-text-primary">Whitefield Main Road</p>
+<p class="font-label-sm text-label-sm text-text-secondary">Drop • 2 students</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold">100m zone</span>
+</div>
+</div>
+</div>
+<!-- Confirm Action Button -->
+<button class="w-full py-3 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg font-bold shadow-md hover:bg-primary transition-all active:scale-[0.98]" id="saveLocationSettingsBtn">
+          Save &amp; Update Geofences
+        </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Container -->
+<div class="fixed bottom-20 inset-x-margin max-w-sm mx-auto z-50 flex items-center gap-2 p-3 bg-inverse-surface text-inverse-on-surface rounded-xl shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4" id="toastNotification">
+<span class="material-symbols-outlined text-success-green-vivid text-[20px]" id="toastIcon">check_circle</span>
+<span class="font-body-sm text-body-sm font-medium" id="toastMsg">Settings updated successfully</span>
+</div>
+</div>
+<script>
+  (function initProfileMicroInteractions() {
+    const modal = document.getElementById('locationModal');
+    const modalSheet = document.getElementById('modalSheet');
+    const backdrop = document.getElementById('modalBackdrop');
+    const openBtn = document.getElementById('openLocationModalBtn');
+    const closeBtn = document.getElementById('closeLocationModalBtn');
+    const saveBtn = document.getElementById('saveLocationSettingsBtn');
+    const radiusSlider = document.getElementById('radiusSlider');
+    const radiusValue = document.getElementById('radiusValue');
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastIcon = document.getElementById('toastIcon');
+
+    function showToast(message, isSuccess = true) {
+      toastMsg.textContent = message;
+      toastIcon.textContent = isSuccess ? 'check_circle' : 'info';
+      toastIcon.className = `material-symbols-outlined text-[20px] ${isSuccess ? 'text-success-green-vivid' : 'text-vehicle-amber'}`;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2600);
+    }
+
+    function openModal() {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100');
+      setTimeout(() => {
+        modalSheet.classList.remove('translate-y-full');
+        modalSheet.classList.add('translate-y-0');
+      }, 10);
+    }
+
+    function closeModal() {
+      modalSheet.classList.add('translate-y-full');
+      modalSheet.classList.remove('translate-y-0');
+      setTimeout(() => {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.classList.remove('opacity-100');
+      }, 250);
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (backdrop) backdrop.addEventListener('click', closeModal);
+
+    if (radiusSlider && radiusValue) {
+      radiusSlider.addEventListener('input', (e) => {
+        radiusValue.textContent = `${e.target.value}m`;
+      });
+    }
+
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        closeModal();
+        showToast('Geofence & permissions updated');
+      });
+    }
+
+    const helpBtn = document.getElementById('helpSupportBtn');
+    if (helpBtn) {
+      helpBtn.addEventListener('click', () => {
+        showToast('Connecting to EduCare Dispatch Support...', false);
+      });
+    }
+
+    const editBtn = document.getElementById('editProfileBtn');
+    if (editBtn) {
+      editBtn.addEventListener('click', () => {
+        showToast('Driver profile edit requested');
+      });
+    }
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to end your driver session?')) {
+          showToast('Logging out session...', false);
+        }
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-card/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(15,23,42,0.05)]" data-active-classes="text-primary-container font-headline-sm"><div class="flex justify-around items-center h-16 px-space-md max-w-md mx-auto"><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 text-text-tertiary transition-all relative group" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-sm text-label-sm">Home</span><span class="absolute -bottom-1 w-6 h-0.5 rounded-full bg-primary-container opacity-0 group-[.active]:opacity-100 transition-opacity"></span></a><a class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 text-text-tertiary transition-all relative group" data-path="trips" href="#"><span class="material-symbols-outlined text-[24px]">directions_bus</span><span class="font-label-sm text-label-sm">Trips</span><span class="absolute -bottom-1 w-6 h-0.5 rounded-full bg-primary-container opacity-0 group-[.active]:opacity-100 transition-opacity"></span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 transition-all relative group text-primary-container font-headline-sm" data-path="profile" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="font-label-sm text-label-sm">Profile</span><span class="absolute -bottom-1 w-6 h-0.5 rounded-full bg-primary-container opacity-0 group-[.active]:opacity-100 transition-opacity"></span></a></div></nav></body></html>

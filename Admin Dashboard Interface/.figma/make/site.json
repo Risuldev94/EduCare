@@ -1,0 +1,10 @@
+{
+  "description": "Manage and customize your website features seamlessly with an intuitive admin interface, ensuring optimal linking and user flow for enhanced performance.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EduCare Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;height:100vh;display:flex;overflow:hidden;}
+
+/* Sidebar */
+#sidebar{width:210px;min-width:210px;background:#0f1623;display:flex;flex-direction:column;height:100vh;overflow-y:auto;}
+.logo{padding:20px 16px 14px;}
+.logo-brand{font-size:20px;font-weight:700;}
+.logo-brand .edu{color:#fff;}.logo-brand .care{color:#60a5fa;}
+.logo-sub{font-size:11px;color:#475569;margin-top:2px;}
+nav{flex:1;padding:4px 8px;display:flex;flex-direction:column;gap:2px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;color:#94a3b8;font-size:13.5px;font-weight:500;transition:background .14s,color .14s;user-select:none;border:none;background:none;width:100%;text-align:left;font-family:inherit;}
+.nav-item:hover{background:#1e2a3d;color:#e2e8f0;}
+.nav-item.active{background:#2563eb;color:#fff;}
+.school-card{margin:8px;background:#1e2a3d;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;}
+.school-icon{width:36px;height:36px;background:#16a34a;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.school-name{font-size:11.5px;font-weight:600;color:#fff;line-height:1.4;}
+.school-tag{font-size:10px;color:#475569;margin-top:1px;}
+
+/* Main */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+#topbar{display:flex;align-items:center;gap:12px;padding:10px 20px;background:#fff;border-bottom:1px solid #e2e8f0;flex-shrink:0;}
+.search-box{display:flex;align-items:center;gap:8px;flex:1;max-width:380px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;color:#94a3b8;font-size:13px;}
+.date-badge{display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 12px;font-size:12.5px;color:#64748b;}
+.notif-btn{position:relative;width:36px;height:36px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.notif-dot{position:absolute;top:-3px;right:-3px;width:16px;height:16px;background:#dc2626;border-radius:50%;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.user-info{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.avatar{width:36px;height:36px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0;}
+.user-name{font-size:12px;font-weight:600;}
+.user-role{font-size:11px;color:#64748b;}
+#content{flex:1;overflow-y:auto;}
+.page{display:none;padding:24px;}
+.page.active{display:block;}
+
+/* Shared */
+.page-title{font-size:22px;font-weight:700;color:#0f172a;}
+.page-sub{font-size:13px;color:#64748b;margin-top:3px;}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;}
+.cp{padding:16px 18px;}
+.stat-grid{display:grid;gap:12px;margin-bottom:18px;}
+.stat-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.stat-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.stat-label{font-size:11.5px;color:#64748b;}
+.stat-value{font-size:20px;font-weight:700;color:#0f172a;line-height:1.2;}
+.stat-sub{font-size:11px;font-weight:500;margin-top:1px;}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;}
+.bg{background:#dcfce7;color:#16a34a;}.by{background:#fef3c7;color:#d97706;}.br{background:#fee2e2;color:#dc2626;}
+.bb{background:#dbeafe;color:#2563eb;}.bp{background:#ede9fe;color:#7c3aed;}.bpk{background:#fce7f3;color:#be185d;}
+.bt{background:#ccfbf1;color:#0d9488;}.bo{background:#ffedd5;color:#ea580c;}.bgr{background:#f1f5f9;color:#475569;}
+.section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.section-title{font-size:14px;font-weight:600;color:#0f172a;}
+.btn-view{font-size:12px;color:#2563eb;cursor:pointer;font-weight:500;background:none;border:none;font-family:inherit;}
+.action-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e2e8f0;border-radius:10px;background:#fff;cursor:pointer;font-size:12.5px;font-weight:500;color:#0f172a;width:100%;text-align:left;transition:background .12s;font-family:inherit;}
+.action-btn:hover{background:#f8fafc;}
+.btn-primary{display:inline-flex;align-items:center;gap:6px;background:#2563eb;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn-primary:hover{background:#1d4ed8;}
+.btn-outline{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#0f172a;border:1px solid #e2e8f0;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;}
+.btn-outline:hover{background:#f8fafc;}
+table{width:100%;border-collapse:collapse;}
+th{font-size:12px;font-weight:600;color:#64748b;padding:10px 12px;text-align:left;border-bottom:1px solid #f1f5f9;}
+td{font-size:13px;padding:11px 12px;border-bottom:1px solid #f8fafc;color:#0f172a;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#fafbfc;}
+.icon-action{width:28px;height:28px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;border:none;background:none;padding:0;}
+.icon-action:hover{background:#f1f5f9;color:#475569;}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:13px;color:#94a3b8;margin-bottom:16px;flex-wrap:wrap;}
+.breadcrumb a{color:#2563eb;cursor:pointer;text-decoration:none;}
+.class-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.class-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.class-card:hover{border-color:#93c5fd;box-shadow:0 2px 8px rgba(37,99,235,.1);}
+.class-icon{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.profile-tabs{display:flex;gap:0;border-bottom:1px solid #e2e8f0;margin-bottom:16px;overflow-x:auto;}
+.ptab{padding:9px 16px;font-size:13px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;}
+.ptab.active{color:#2563eb;border-bottom-color:#2563eb;}
+.ptab:hover:not(.active){color:#0f172a;}
+.ann-tab{padding:8px 14px;font-size:13px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;}
+.ann-tab.active{color:#2563eb;border-bottom-color:#2563eb;}
+.two-col{display:grid;grid-template-columns:1fr 280px;gap:16px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.pg-btn{width:30px;height:30px;border-radius:6px;border:1px solid #e2e8f0;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;font-weight:500;color:#475569;font-family:inherit;}
+.pg-btn.active{background:#2563eb;color:#fff;border-color:#2563eb;}
+.pg-btn:hover:not(.active){background:#f1f5f9;}
+.progress-wrap{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:3px;}
+.map-wrap{border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(135deg,#dde8dd 0%,#cce0cc 50%,#d5e8d5 100%);}
+.bus-pin{position:absolute;background:#fff;border-radius:8px;padding:6px 9px;box-shadow:0 2px 8px rgba(0,0,0,.15);min-width:90px;}
+.bus-pin-row{display:flex;align-items:center;gap:5px;}
+.bus-dot{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bus-name{font-size:11.5px;font-weight:700;color:#0f172a;}
+.bus-status{font-size:10.5px;font-weight:500;margin-top:1px;}
+.bus-speed{font-size:9.5px;color:#94a3b8;}
+.map-ctrl{position:absolute;bottom:10px;right:10px;display:flex;flex-direction:column;gap:4px;}
+.map-btn{width:28px;height:28px;background:#fff;border:1px solid #ddd;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#555;font-weight:700;line-height:1;}
+.map-toggle{position:absolute;top:10px;right:10px;display:flex;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1);}
+.map-toggle button{padding:5px 12px;font-size:11px;font-weight:600;border:none;cursor:pointer;font-family:inherit;}
+.alert-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9;}
+.alert-row:last-child{border-bottom:none;}
+.mini-stat{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;}
+.mini-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+input[type=text],select{border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:13px;font-family:inherit;color:#0f172a;background:#fff;outline:none;}
+input[type=text]:focus,select:focus{border-color:#93c5fd;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px;}
+.ava-sm{width:34px;height:34px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#64748b;flex-shrink:0;}
+@media(max-width:960px){.two-col{grid-template-columns:1fr;}.class-grid{grid-template-columns:repeat(2,1fr);}.three-col{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<aside id="sidebar"></aside>
+<div id="main">
+  <header id="topbar"></header>
+  <div id="content"></div>
+</div>
+
+<script>
+// ─── SVG icon factory ──────────────────────────────────────────────────────
+const PATHS = {
+  home:     '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  bus:      '<rect x="1" y="3" width="22" height="16" rx="2"/><path d="M1 9h22M8 19v2M16 19v2M1 13h22"/>',
+  users:    '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  book:     '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  checksq:  '<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
+  bar:      '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+  mega:     '<path d="M18 8a5 5 0 0 1 0 8M3 8v8a1 1 0 0 0 1 1h2l3 3V5L6 8H4a1 1 0 0 0-1 1z"/><line x1="21" y1="5" x2="21" y2="19"/>',
+  usercog:  '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><circle cx="19" cy="11" r="2"/><path d="M19 8v1M19 13v1M16.5 9.5l.7.7M21.5 12.5l.7.7M16.5 12.5l.7-.7M21.5 9.5l.7-.7"/>',
+  file:     '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  search:   '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+  bell:     '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  chevd:    '<polyline points="6 9 12 15 18 9"/>',
+  chevr:    '<polyline points="9 18 15 12 9 6"/>',
+  chevl:    '<polyline points="15 18 9 12 15 6"/>',
+  plus:     '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+  eye:      '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+  edit:     '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+  more:     '<circle cx="12" cy="5" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/>',
+  pin:      '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  alert:    '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  info:     '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+  checkc:   '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+  shield:   '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  grad:     '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  userx:    '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/>',
+  clock:    '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 8 14"/>',
+  send:     '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>',
+  phone:    '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
+};
+
+function ic(name, color='currentColor', size=16) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${PATHS[name]||''}</svg>`;
+}
+
+// ─── State ─────────────────────────────────────────────────────────────────
+let currentClass = 'Class 5';
+let currentStudent = 'Aarav Sharma';
+
+// ─── Navigation ────────────────────────────────────────────────────────────
+function navigate(page, extra) {
+  if (page === 'class-students' && extra) currentClass = extra;
+  if (page === 'student-profile' && extra) currentStudent = extra;
+
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+
+  const navPage = (page==='class-students'||page==='student-profile') ? 'students' : page;
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page===navPage));
+  document.getElementById('content').scrollTop = 0;
+
+  // Update dynamic content
+  if (page === 'class-students') renderClassStudents();
+  if (page === 'student-profile') renderStudentProfile();
+}
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────
+document.getElementById('sidebar').innerHTML = `
+  <div class="logo">
+    <div class="logo-brand"><span class="edu">Edu</span><span class="care">Care</span></div>
+    <div class="logo-sub">Schools. Safer. Smarter. Together.</div>
+  </div>
+  <nav>
+    ${[
+      ['dashboard','home','Dashboard'],
+      ['transport','bus','Transport'],
+      ['students','users','Students'],
+      ['academics','book','Academics'],
+      ['attendance','checksq','Attendance'],
+      ['results','bar','Results'],
+      ['announcements','mega','Announcements'],
+      ['staff','usercog','Staff &amp; Drivers'],
+      ['reports','file','Reports'],
+      ['settings','settings','Settings'],
+    ].map(([p,icn,lbl])=>`
+      <button class="nav-item${p==='dashboard'?' active':''}" data-page="${p}" onclick="navigate('${p}')">${ic(icn)} ${lbl}</button>
+    `).join('')}
+  </nav>
+  <div class="school-card">
+    <div class="school-icon">${ic('shield','white',18)}</div>
+    <div>
+      <div class="school-name">Greenwood International School</div>
+      <div class="school-tag">Learn · Grow · Belong</div>
+    </div>
+  </div>`;
+
+// ─── Topbar ────────────────────────────────────────────────────────────────
+document.getElementById('topbar').innerHTML = `
+  <div class="search-box">${ic('search','#94a3b8')} Search students, staff, routes...</div>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+    <div class="date-badge">${ic('calendar','#64748b',14)} Mon, 9 Sep 2026</div>
+    <div class="notif-btn">${ic('bell','#64748b',16)}<span class="notif-dot">3</span></div>
+    <div class="user-info">
+      <div class="avatar">P</div>
+      <div><div class="user-role">Principal</div><div class="user-name">Dr. Ananya Rao</div></div>
+      ${ic('chevd','#94a3b8',14)}
+    </div>
+  </div>`;
+
+// ─── Dashboard ─────────────────────────────────────────────────────────────
+function renderDashboard() {
+  const stats = [
+    ['#dbeafe','users','#2563eb','Total Students','1,248','↑ +12% vs. last month','#16a34a'],
+    ['#dcfce7','checkc','#16a34a','Present Today','1,196','95.8%','#16a34a'],
+    ['#fee2e2','userx','#dc2626','Absent Today','52','4.2%','#dc2626'],
+    ['#dbeafe','bus','#2563eb','Total Buses','18','Active Today','#64748b'],
+    ['#dcfce7','checkc','#16a34a','On Time','16','88.9%','#16a34a'],
+    ['#fef3c7','clock','#d97706','Delayed','2','11.1%','#d97706'],
+  ];
+  const routes = [
+    ['Route 1','On Time','28/28'],['Route 2','On Time','32/32'],['Route 3','On Time','26/26'],
+    ['Route 4','12 min delay','24/26'],['Route 5','On Time','30/30'],
+  ];
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:16px;flex-wrap:wrap;">
+    <div><div class="page-title">Good Morning, Dr. Ananya Rao!</div><div class="page-sub">Here's what's happening at your school today.</div></div>
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:10px 16px;font-size:12.5px;color:#1e40af;font-style:italic;text-align:center;max-width:240px;">
+      <span style="font-size:18px;color:#3b82f6;font-style:normal;">"</span> "Better students. Brighter tomorrows."
+      <div style="font-size:11px;color:#3b82f6;font-style:normal;font-weight:600;margin-top:3px;">– EduCare</div>
+    </div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(6,1fr);">
+    ${stats.map(([bg,icn,icol,lbl,val,sub,scol])=>`
+    <div class="stat-card"><div class="stat-icon" style="background:${bg};">${ic(icn,icol,20)}</div>
+    <div><div class="stat-label">${lbl}</div><div class="stat-value">${val}</div><div class="stat-sub" style="color:${scol};">${sub}</div></div></div>`).join('')}
+  </div>
+  <div class="two-col">
+    <div class="card cp">
+      <div class="section-hd">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="section-title">Live Transport Tracking</span>
+          <span style="font-size:12px;color:#64748b;display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#16a34a;border-radius:50%;display:inline-block;"></span>18 buses currently running</span>
+        </div>
+        <button class="btn-view" onclick="navigate('transport')">View Full Map</button>
+      </div>
+      ${mapHtml(280)}
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Today's Transport Status</span><button class="btn-view" onclick="navigate('transport')">View All</button></div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          ${routes.map(([r,s,c])=>{const d=s.includes('delay');return`
+          <div style="display:flex;align-items:center;gap:7px;">
+            ${ic('bus','#94a3b8',14)}
+            <span style="font-size:13px;font-weight:500;flex:1;">${r}</span>
+            <span class="badge ${d?'by':'bg'}">${s}</span>
+            <span style="font-size:11px;color:#94a3b8;">${c}</span>
+            ${ic('chevr','#cbd5e1',12)}
+          </div>`;}).join('')}
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button class="action-btn" onclick="navigate('announcements')">${ic('mega','#2563eb',15)} Create Announcement</button>
+          <button class="action-btn" onclick="navigate('transport')">${ic('bus','#7c3aed',15)} Manage Routes &amp; Buses</button>
+          <button class="action-btn" onclick="navigate('students')">${ic('users','#16a34a',15)} View Student List</button>
+          <button class="action-btn" onclick="navigate('reports')">${ic('file','#0d9488',15)} Generate Report</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Transport ─────────────────────────────────────────────────────────────
+function renderTransport() {
+  const rStats=[
+    ['#dbeafe','bus','#2563eb','Total Routes','5','Active Routes'],
+    ['#ede9fe','bus','#7c3aed','Total Buses','18','All Buses'],
+    ['#dcfce7','users','#16a34a','Drivers','18','Active Drivers'],
+    ['#ffedd5','users','#ea580c','Students in Transport','412','Across all routes'],
+  ];
+  const rows=[
+    ['1','Route 1','MG Road · Koramangala','Ramesh K','KA-01-AB-1234','28/28','On Time','#2563eb'],
+    ['2','Route 2','Yelahanka · Hebbal','Suresh M','KA-01-CD-5678','32/32','On Time','#7c3aed'],
+    ['3','Route 3','Whitefield · ITPL','Ajay P','KA-01-EF-9012','26/26','On Time','#16a34a'],
+    ['4','Route 4','Marathahalli · Brookefield','Manoj S','KA-01-GH-3456','24/26','12 min delay','#dc2626'],
+    ['5','Route 5','HSR Layout · BTM','Vijay L','KA-01-IJ-7890','30/30','On Time','#ea580c'],
+  ];
+  const trips=[
+    ['Route 1','7:15 AM','Greenwood Main Gate','Departing','bb'],
+    ['Route 2','7:30 AM','Yelahanka','On Time','bg'],
+    ['Route 3','7:45 AM','Whitefield','On Time','bg'],
+    ['Route 4','8:00 AM','Marathahalli','12 min delay','by'],
+    ['Route 5','8:15 AM','HSR Layout','On Time','bg'],
+  ];
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Transport Management</div><div class="page-sub">Track buses, manage routes and ensure safe journeys for every student.</div></div>
+    <button class="btn-primary">${ic('plus','white',14)} Add Route</button>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    ${rStats.map(([bg,icn,icol,lbl,val,sub])=>`
+    <div class="stat-card"><div class="stat-icon" style="background:${bg};">${ic(icn,icol,20)}</div>
+    <div><div class="stat-label">${lbl}</div><div class="stat-value">${val}</div><div class="stat-sub" style="color:#64748b;">${sub}</div></div></div>`).join('')}
+  </div>
+  <div class="two-col">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card cp">
+        <div class="section-hd">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="section-title">Live Bus Tracking</span>
+            <span style="font-size:12px;color:#64748b;display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;background:#16a34a;border-radius:50%;display:inline-block;"></span>18 buses live</span>
+          </div>
+          <button class="btn-view">View Full Map ↗</button>
+        </div>
+        ${mapHtml(240, true)}
+      </div>
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Routes Overview</span><button class="btn-view">Manage Routes</button></div>
+        <table>
+          <thead><tr><th>#</th><th>Route Name</th><th>Driver</th><th>Bus Number</th><th>Students</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            ${rows.map(([n,name,sub,driver,bus,students,status,color])=>`
+            <tr>
+              <td style="color:#94a3b8;">${n}</td>
+              <td><div style="display:flex;align-items:center;gap:7px;"><span style="width:10px;height:10px;background:${color};border-radius:50%;flex-shrink:0;"></span><div><div style="font-weight:600;">${name}</div><div style="font-size:11px;color:#94a3b8;">${sub}</div></div></div></td>
+              <td>${driver}</td><td style="font-size:12px;color:#64748b;">${bus}</td><td>${students}</td>
+              <td><span class="badge ${status.includes('delay')?'by':'bg'}">${status}</span></td>
+              <td><div style="display:flex;gap:4px;align-items:center;">
+                <button class="btn-outline" style="padding:4px 10px;font-size:11px;">${ic('pin','#2563eb',12)} Track</button>
+                <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+              </div></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <button class="action-btn" style="flex-direction:column;align-items:flex-start;gap:4px;">${ic('plus','#2563eb',15)}<span>Add Route</span></button>
+          <button class="action-btn" style="flex-direction:column;align-items:flex-start;gap:4px;">${ic('bus','#7c3aed',15)}<span>Manage Buses</span></button>
+          <button class="action-btn" style="flex-direction:column;align-items:flex-start;gap:4px;">${ic('users','#16a34a',15)}<span>Manage Drivers</span></button>
+          <button class="action-btn" style="flex-direction:column;align-items:flex-start;gap:4px;">${ic('clock','#d97706',15)}<span>Route Timetable</span></button>
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Upcoming Trips</span><button class="btn-view">View All</button></div>
+        <div>
+          ${trips.map(([r,t,loc,st,cls])=>`
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f1f5f9;">
+            ${ic('bus','#94a3b8',14)}
+            <div style="flex:1;"><div style="font-size:13px;font-weight:600;">${r}</div><div style="font-size:11px;color:#94a3b8;">${loc}</div></div>
+            <div style="font-size:12px;font-weight:600;">${t}</div>
+            <span class="badge ${cls}">${st}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Transport Alerts</span><button class="btn-view">View All</button></div>
+        <div>
+          ${[
+            ['alert','#fee2e2','#dc2626','Route 4 is delayed by 12 minutes','8:02 AM'],
+            ['info','#dbeafe','#2563eb','Bus KA-01-AB-1234 reached Whitefield','7:48 AM'],
+            ['checkc','#dcfce7','#16a34a','All buses completed morning pickup','7:35 AM'],
+          ].map(([icn,bg,col,msg,t])=>`
+          <div class="alert-row">
+            <div style="width:28px;height:28px;background:${bg};border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${ic(icn,col,14)}</div>
+            <div style="flex:1;font-size:12.5px;">${msg}</div>
+            <div style="font-size:11px;color:#94a3b8;white-space:nowrap;">${t}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Students (class grid) ─────────────────────────────────────────────────
+function renderStudents() {
+  const classes=[
+    ['Nursery','28','#fce7f3','#be185d'],['LKG','32','#ffedd5','#ea580c'],
+    ['UKG','30','#fef3c7','#d97706'],['Class 1','34','#dcfce7','#16a34a'],
+    ['Class 2','32','#dbeafe','#2563eb'],['Class 3','31','#ede9fe','#7c3aed'],
+    ['Class 4','29','#fce7f3','#be185d'],['Class 5','28','#ccfbf1','#0d9488'],
+    ['Class 6','33','#dcfce7','#16a34a'],['Class 7','30','#ffedd5','#ea580c'],
+    ['Class 8','27','#ede9fe','#7c3aed'],['Class 9','25','#dbeafe','#2563eb'],
+    ['Class 10','22','#fce7f3','#be185d'],['Class 11','24','#dbeafe','#2563eb'],
+    ['Class 12','20','#dcfce7','#16a34a'],
+  ];
+  return `
+  <div class="breadcrumb">${ic('home','#94a3b8',13)} <span>›</span> <a onclick="navigate('students')">Students</a> <span>›</span> Select Class</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Students</div><div class="page-sub">Select a class to view the list of students.</div></div>
+    <input type="text" placeholder="Search class (e.g. Grade 5, Class 10)..." style="width:280px;"/>
+  </div>
+  <div class="class-grid">
+    ${classes.map(([name,count,bg,color])=>`
+    <div class="class-card" onclick="navigate('class-students','${name}')">
+      <div class="class-icon" style="background:${bg};">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:600;">${name}</div><div style="font-size:12px;color:#64748b;margin-top:2px;">${ic('users','#94a3b8',12)} ${count} Students</div></div>
+      ${ic('chevr','#cbd5e1',14)}
+    </div>`).join('')}
+    <div class="class-card" style="background:#f8fafc;cursor:default;">
+      <div class="class-icon" style="background:#dbeafe;">${ic('users','#2563eb',22)}</div>
+      <div><div style="font-size:15px;font-weight:700;">1,248 <span style="font-size:13px;font-weight:600;color:#64748b;">Total Students</span></div><div style="font-size:12px;color:#64748b;margin-top:2px;">Across 15 classes</div></div>
+    </div>
+  </div>`;
+}
+
+// ─── Class Students ────────────────────────────────────────────────────────
+function renderClassStudents() {
+  const students=[
+    ['Aarav Sharma','S/o Rajesh Sharma','GS-2021-001','1','Male','+91 98765 43210','Route 1','Active'],
+    ['Ananya Nair','D/o Suresh Nair','GS-2021-002','2','Female','+91 98765 43211','Route 1','Active'],
+    ['Rohan Gupta','S/o Amit Gupta','GS-2021-003','3','Male','+91 98765 43212','Route 2','Active'],
+    ['Diya Patel','D/o Kiran Patel','GS-2021-004','4','Female','+91 98765 43213','Route 2','Active'],
+    ['Vihaan Reddy','S/o Prakash Reddy','GS-2021-005','5','Male','+91 98765 43214','Route 3','Active'],
+    ['Ishita Singh','D/o Neeraj Singh','GS-2021-006','6','Female','+91 98765 43215','Route 3','Active'],
+    ['Karthik Menon','S/o Ajith Menon','GS-2021-007','7','Male','+91 98765 43216','Route 4','Inactive'],
+    ['Sara Khan','D/o Imran Khan','GS-2021-008','8','Female','+91 98765 43217','Route 4','Active'],
+  ];
+  const routeBadge = ['bb','bb','bp','bp','by','by','bo','bo'];
+  document.getElementById('page-class-students').innerHTML = `
+  <div class="breadcrumb">${ic('home','#94a3b8',13)} <span>›</span> <a onclick="navigate('students')">Students</a> <span>›</span> <span>${currentClass}</span></div>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="btn-outline" onclick="navigate('students')" style="padding:7px 10px;">${ic('chevl','#64748b',16)}</button>
+      <div><div class="page-title">${currentClass}</div><div class="page-sub">28 Students</div></div>
+    </div>
+    <button class="btn-primary">${ic('plus','white',14)} Add Student</button>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('users','#2563eb',20)}</div><div><div class="stat-label">Total Students</div><div class="stat-value">28</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('checkc','#16a34a',20)}</div><div><div class="stat-label">Active Students</div><div class="stat-value">26</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fee2e2;">${ic('userx','#dc2626',20)}</div><div><div class="stat-label">Inactive Students</div><div class="stat-value">2</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('users','#d97706',20)}</div><div><div class="stat-label">Boys / Girls</div><div class="stat-value">14 / 14</div></div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+    <input type="text" placeholder="Search by name, admission no., or roll no..." style="flex:1;min-width:200px;max-width:400px;"/>
+    <select><option>All Sections</option><option>Section A</option></select>
+    <select><option>All Status</option><option>Active</option><option>Inactive</option></select>
+    <select><option>Sort by</option><option>Roll No.</option><option>Name</option></select>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>#</th><th>Student Name</th><th>Admission No.</th><th>Roll No.</th><th>Gender</th><th>Parent Contact</th><th>Transport</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${students.map(([name,parent,adm,roll,gender,contact,route,status],i)=>`
+        <tr>
+          <td style="color:#94a3b8;">${i+1}</td>
+          <td><div style="display:flex;align-items:center;gap:9px;"><div class="ava-sm">${name[0]}</div><div><div style="font-weight:600;">${name}</div><div style="font-size:11px;color:#94a3b8;">${parent}</div></div></div></td>
+          <td style="font-size:12px;color:#64748b;">${adm}</td><td>${roll}</td>
+          <td><span class="badge ${gender==='Male'?'bb':'bpk'}">${gender}</span></td>
+          <td style="font-size:12px;">${contact}</td>
+          <td><span class="badge ${routeBadge[i]}">${route}</span></td>
+          <td><span class="badge ${status==='Active'?'bg':'br'}">${status}</span></td>
+          <td><div style="display:flex;gap:2px;">
+            <button class="icon-action" onclick="navigate('student-profile','${name}')" title="View">${ic('eye','#94a3b8',14)}</button>
+            <button class="icon-action">${ic('edit','#94a3b8',14)}</button>
+            <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+          </div></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid #f1f5f9;">
+      <span style="font-size:12.5px;color:#64748b;">Showing 1–8 of 28 students</span>
+      <div style="display:flex;gap:4px;">
+        <button class="pg-btn">‹</button>
+        <button class="pg-btn active">1</button>
+        <button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">4</button>
+        <button class="pg-btn">›</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Student Profile ───────────────────────────────────────────────────────
+function renderStudentProfile() {
+  const subjects=[
+    ['English','#16a34a',88],['Mathematics','#2563eb',92],['Science','#7c3aed',85],
+    ['Social Studies','#d97706',78],['Hindi','#dc2626',90],['Computer Science','#0d9488',95],
+  ];
+  document.getElementById('page-student-profile').innerHTML = `
+  <div class="breadcrumb">${ic('home','#94a3b8',13)} <span>›</span>
+    <a onclick="navigate('students')">Students</a> <span>›</span>
+    <a onclick="navigate('class-students','${currentClass}')">${currentClass}</a> <span>›</span>
+    <span>${currentStudent}</span>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:14px;">
+    <button class="btn-outline" onclick="navigate('class-students','${currentClass}')">${ic('chevl','#64748b',14)} Back to Students</button>
+    <button class="btn-primary">${ic('edit','white',14)} Edit Details</button>
+  </div>
+  <div class="card cp" style="margin-bottom:14px;">
+    <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="width:88px;height:88px;border-radius:12px;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;">👦</div>
+      <div style="flex:1;min-width:200px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:22px;font-weight:700;">${currentStudent}</span>
+          <span class="badge bg">Active</span>
+        </div>
+        <div style="font-size:13px;color:#64748b;margin-top:4px;">${currentClass} &nbsp;|&nbsp; Roll No. 1 &nbsp;|&nbsp; Admission No. GS-2021-001</div>
+        <div style="font-size:13px;color:#64748b;margin-top:2px;">♂ Male &nbsp;|&nbsp; 10 years &nbsp;|&nbsp; 14 May 2015</div>
+        <div style="font-size:13px;color:#64748b;margin-top:2px;">#102, 5th Cross, Koramangala, Bengaluru – 560034</div>
+      </div>
+      <div class="card" style="min-width:190px;padding:12px 14px;">
+        <div style="font-size:12px;font-weight:600;color:#64748b;margin-bottom:8px;">${ic('users','#94a3b8',13)} Parent / Guardian</div>
+        <div style="font-size:13px;font-weight:600;">Mr. Rajesh Sharma <span style="font-weight:400;color:#64748b;font-size:11px;">(Father)</span></div>
+        <div style="font-size:12px;color:#64748b;margin-top:2px;">${ic('phone','#94a3b8',11)} +91 98765 43210</div>
+        <div style="font-size:13px;font-weight:600;margin-top:6px;">Mrs. Priya Sharma <span style="font-weight:400;color:#64748b;font-size:11px;">(Mother)</span></div>
+        <div style="font-size:12px;color:#64748b;margin-top:2px;">${ic('phone','#94a3b8',11)} +91 98765 43211</div>
+      </div>
+      <div class="card" style="min-width:190px;padding:12px 14px;">
+        <div style="font-size:12px;font-weight:600;color:#64748b;margin-bottom:8px;">${ic('bus','#94a3b8',13)} Transport</div>
+        <div style="font-size:13px;font-weight:600;">Route 1 – Morning &amp; Evening</div>
+        <div style="font-size:12px;color:#64748b;margin-top:3px;">Stop: Koramangala 5th Block</div>
+        <div style="font-size:12px;color:#64748b;">Pickup: 7:15 AM · Drop: 3:15 PM</div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-tabs" id="ptabs">
+    ${['Overview','Personal Details','Attendance','Results','Transport','Documents','Notes'].map((t,i)=>`
+    <div class="ptab${i===0?' active':''}" onclick="setTab(this,'ptabs')">${t}</div>`).join('')}
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="mini-stat"><div class="mini-icon" style="background:#ede9fe;">${ic('grad','#7c3aed',18)}</div><div><div style="font-size:11px;color:#64748b;">Attendance</div><div style="font-size:18px;font-weight:700;">92%</div><div style="font-size:11px;color:#64748b;">Present 165/180 days</div></div>${ic('chevr','#cbd5e1',13)}</div>
+    <div class="mini-stat"><div class="mini-icon" style="background:#dcfce7;">${ic('book','#16a34a',18)}</div><div><div style="font-size:11px;color:#64748b;">Academic Performance</div><div style="font-size:18px;font-weight:700;color:#16a34a;">A Grade</div><div style="font-size:11px;color:#64748b;">Overall (Term 1)</div></div>${ic('chevr','#cbd5e1',13)}</div>
+    <div class="mini-stat"><div class="mini-icon" style="background:#fef3c7;">${ic('bus','#d97706',18)}</div><div><div style="font-size:11px;color:#64748b;">Transport Status</div><div style="font-size:18px;font-weight:700;color:#16a34a;">Active</div><div style="font-size:11px;color:#64748b;">Route 1</div></div>${ic('chevr','#cbd5e1',13)}</div>
+    <div class="mini-stat"><div class="mini-icon" style="background:#dbeafe;">${ic('file','#2563eb',18)}</div><div><div style="font-size:11px;color:#64748b;">Remarks</div><div style="font-size:18px;font-weight:700;">Good</div><div style="font-size:11px;color:#64748b;">Consistent performance</div></div>${ic('chevr','#cbd5e1',13)}</div>
+  </div>
+  <div class="three-col">
+    <div class="card cp">
+      <div class="section-hd"><span class="section-title">Recent Attendance</span><button class="btn-view">View All</button></div>
+      ${[['Mon, 8 Sep 2026','Present','bg'],['Fri, 5 Sep 2026','Present','bg'],['Thu, 4 Sep 2026','Absent','br'],['Wed, 3 Sep 2026','Present','bg'],['Tue, 2 Sep 2026','Present','bg']].map(([d,s,c])=>`
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f8fafc;">
+        <div style="flex:1;font-size:13px;">${d}</div><span class="badge ${c}">${s}</span>${ic('chevr','#e2e8f0',12)}
+      </div>`).join('')}
+    </div>
+    <div class="card cp">
+      <div class="section-hd"><span class="section-title">Recent Results</span><button class="btn-view">View All</button></div>
+      ${[['Term 1 (2026-27)','A'],['Unit Test 2 – Mathematics','A'],['Unit Test 2 – Science','B+'],['Unit Test 2 – English','A'],['Unit Test 2 – Social Studies','A-']].map(([exam,g])=>`
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f8fafc;">
+        <div style="flex:1;font-size:13px;">${exam}</div><span class="badge bg" style="min-width:28px;justify-content:center;">${g}</span>
+      </div>`).join('')}
+    </div>
+    <div class="card cp">
+      <div class="section-hd"><span class="section-title">Subjects (Term 1)</span><button class="btn-view">View Full Report</button></div>
+      ${subjects.map(([s,color,score])=>`
+      <div style="margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;"><span>${s}</span><span style="font-weight:600;">${score}/100</span></div>
+        <div class="progress-wrap"><div class="progress-fill" style="width:${score}%;background:${color};"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="three-col" style="margin-top:12px;">
+    <div class="card cp">
+      <div class="section-hd"><span class="section-title">Notes from Teachers</span><button class="btn-view">View All</button></div>
+      <div style="margin-bottom:10px;"><div style="font-size:11px;color:#94a3b8;margin-bottom:3px;">5 Sep 2026 | Ms. Kavya (Class Teacher)</div><div style="font-size:13px;">Aarav is attentive in class and actively participates in discussions.</div></div>
+      <div><div style="font-size:11px;color:#94a3b8;margin-bottom:3px;">20 Aug 2026 | Mr. Rohan (Maths Teacher)</div><div style="font-size:13px;">Shows good improvement in problem solving skills.</div></div>
+    </div>
+    <div class="card cp">
+      <div class="section-hd"><span class="section-title">Achievements</span><button class="btn-view">View All</button></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="width:32px;height:32px;background:#fef3c7;border-radius:8px;display:flex;align-items:center;justify-content:center;">🏆</div>
+        <div><div style="font-size:13px;font-weight:600;">Inter-School Science Quiz</div><div style="font-size:11px;color:#64748b;">Second Prize · 12 Aug 2026</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;background:#fef3c7;border-radius:8px;display:flex;align-items:center;justify-content:center;">⭐</div>
+        <div><div style="font-size:13px;font-weight:600;">Star Student</div><div style="font-size:11px;color:#64748b;">For consistent performance · 1 Jul 2026</div></div>
+      </div>
+    </div>
+    <div class="card cp">
+      <div class="section-hd"><span class="section-title">Emergency Contacts</span>${ic('edit','#2563eb',14)}</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <div style="width:28px;height:28px;background:#fee2e2;border-radius:6px;display:flex;align-items:center;justify-content:center;">🏥</div>
+        <div><div style="font-size:13px;font-weight:600;">Dr. Meera Iyer (Family Doctor)</div><div style="font-size:12px;color:#64748b;">+91 99876 54321</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:28px;height:28px;background:#fee2e2;border-radius:6px;display:flex;align-items:center;justify-content:center;">🩸</div>
+        <div><div style="font-size:13px;font-weight:600;">Blood Group</div><div style="font-size:12px;color:#64748b;">B+</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Announcements ─────────────────────────────────────────────────────────
+function renderAnnouncements() {
+  const rows=[
+    ['1','Parent-Teacher Meeting','We are pleased to inform you about the upcoming PTM scheduled for...','Academics','bb','Parents','bp','9 Sep 2026 10:00 AM','Published','bg'],
+    ['2','Holiday Notice','The school will remain closed on 14th September 2026 on account of...','General','bo','Everyone','bb','7 Sep 2026 4:30 PM','Published','bg'],
+    ['3','Bus Route Change','Please note that Route 3 will have a new pickup time starting next Monday...','Transport','bg','Parents','bp','6 Sep 2026 11:00 AM','Published','bg'],
+    ['4','Science Exhibition','We are excited to announce our annual Science Exhibition on 20th September...','Events','bpk','Students','bt','5 Sep 2026 3:00 PM','Published','bg'],
+    ['5','Fee Payment Reminder','This is a reminder to complete the pending fee payment for Term 1...','Fees','bp','Parents','bp','4 Sep 2026 9:00 AM','Scheduled','by'],
+    ['6','Inter-School Sports','Our students will be participating in the Inter-School Sports Meet next week...','Sports','bt','Students','bt','3 Sep 2026 2:15 PM','Published','bg'],
+    ['7','New Library Books','We are happy to share that new books have been added to the library...','Academics','bb','Students','bt','2 Sep 2026 11:00 AM','Draft','bgr'],
+    ['8','Health & Safety Advisory','With the change in weather, please follow these health guidelines...','Health','br','Everyone','bb','1 Sep 2026 10:30 AM','Scheduled','by'],
+  ];
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Announcements</div><div class="page-sub">Keep your school community informed, engaged and connected.</div></div>
+    <button class="btn-primary">${ic('plus','white',14)} Create Announcement</button>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('send','#2563eb',18)}</div><div><div class="stat-label">Total Announcements</div><div class="stat-value">24</div><div class="stat-sub" style="color:#64748b;">This Term</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('checkc','#16a34a',18)}</div><div><div class="stat-label">Published</div><div class="stat-value">20</div><div class="stat-sub" style="color:#16a34a;">83.3%</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('clock','#d97706',18)}</div><div><div class="stat-label">Scheduled</div><div class="stat-value">2</div><div class="stat-sub" style="color:#d97706;">8.3%</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#f1f5f9;">${ic('file','#64748b',18)}</div><div><div class="stat-label">Drafts</div><div class="stat-value">2</div><div class="stat-sub" style="color:#64748b;">8.3%</div></div></div>
+  </div>
+  <div class="two-col">
+    <div class="card cp">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+        <div style="display:flex;" id="ann-tabs">
+          ${['All','Published','Scheduled','Drafts'].map((t,i)=>`<div class="ann-tab${i===0?' active':''}" onclick="setTab(this,'ann-tabs')">${t}</div>`).join('')}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input type="text" placeholder="Search announcements..." style="width:160px;"/>
+          <select style="font-size:12px;"><option>All Categories</option></select>
+          <select style="font-size:12px;"><option>All Audiences</option></select>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>#</th><th>Title</th><th>Message Preview</th><th>Category</th><th>Audience</th><th>Date &amp; Time</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${rows.map(([n,title,preview,cat,catcls,aud,audcls,dt,status,stcls])=>`
+          <tr>
+            <td style="color:#94a3b8;">${n}</td>
+            <td style="font-weight:600;font-size:13px;">${title}</td>
+            <td style="font-size:12px;color:#64748b;max-width:160px;">${preview}</td>
+            <td><span class="badge ${catcls}">${cat}</span></td>
+            <td><span class="badge ${audcls}">${aud}</span></td>
+            <td style="font-size:12px;color:#64748b;white-space:nowrap;">${dt}</td>
+            <td><span class="badge ${stcls}">${status}</span></td>
+            <td><div style="display:flex;gap:2px;">
+              <button class="icon-action">${ic('eye','#94a3b8',14)}</button>
+              <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+            </div></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0 0;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:12.5px;color:#64748b;">Showing 1–8 of 24 announcements</span>
+        <div style="display:flex;gap:4px;"><button class="pg-btn">‹</button><button class="pg-btn active">1</button><button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">›</button></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:12px;padding:20px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:8px;">📣</div>
+        <div style="font-size:14px;font-weight:700;color:#1e40af;margin-bottom:6px;">Communicate Better, Build a Stronger Community.</div>
+        <div style="font-size:12.5px;color:#3b82f6;">Share important updates, events and notices with students, parents and staff.</div>
+      </div>
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button class="action-btn">${ic('send','#2563eb',15)} Create Announcement</button>
+          <button class="action-btn">${ic('clock','#7c3aed',15)} Schedule Announcement</button>
+          <button class="action-btn">${ic('file','#16a34a',15)} Announcement Templates</button>
+          <button class="action-btn">${ic('eye','#d97706',15)} View Sent History</button>
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Categories</span><button class="btn-view">Manage</button></div>
+        ${[['#2563eb','Academics',6],['#16a34a','Transport',4],['#dc2626','Events',3],['#d97706','General',4],['#7c3aed','Fees',2],['#0d9488','Sports',2],['#be185d','Health',2]].map(([c,n,cnt])=>`
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
+          <span style="width:8px;height:8px;background:${c};border-radius:50%;flex-shrink:0;"></span>
+          <span style="font-size:13px;flex:1;">${n}</span><span style="font-size:12px;color:#94a3b8;">${cnt}</span>
+        </div>`).join('')}
+        <button class="action-btn" style="margin-top:4px;">${ic('plus','#2563eb',13)} Add Category</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Map HTML ───────────────────────────────────────────────────────────────
+function mapHtml(h, transport=false) {
+  const pins = transport ? [
+    ['Route 2','On Time','#7c3aed','10%','18%'],
+    ['Route 4','12 min delay','#dc2626','12%','55%'],
+    ['Route 1','On Time','#2563eb','50%','10%'],
+    ['Route 3','On Time','#16a34a','55%','60%'],
+    ['Route 5','On Time','#ea580c','70%','36%'],
+  ] : [
+    ['Route 4','On Time','#16a34a','14%','17%'],
+    ['Route 7','12 min delay','#d97706','22%','52%'],
+    ['Route 2','On Time','#16a34a','54%','20%'],
+    ['Route 1','On Time','#16a34a','60%','62%'],
+  ];
+  const speed = ['42 km/h','28 km/h','35 km/h','38 km/h','33 km/h'];
+  return `
+  <div class="map-wrap" style="height:${h}px;">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(150,180,150,.18) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(150,180,150,.18) 40px);"></div>
+    <div style="position:absolute;background:#c8a850;height:3px;top:50%;left:0;right:0;"></div>
+    <div style="position:absolute;background:#b8c8b8;width:2px;top:0;bottom:0;left:45%;"></div>
+    <div style="position:absolute;background:#b8c8b8;height:2px;top:32%;left:0;right:0;"></div>
+    <div style="position:absolute;background:#c8a850;height:3px;bottom:22%;left:0;right:0;transform:rotate(2deg);"></div>
+    <div style="position:absolute;font-size:13px;font-weight:700;color:#444;top:44%;left:33%;">Bengaluru</div>
+    <div style="position:absolute;font-size:10px;color:#888;top:10%;left:60%;">WHITEFIELD</div>
+    <div style="position:absolute;font-size:10px;color:#888;top:65%;left:60%;">MARATHAHALLI</div>
+    <div style="position:absolute;font-size:10px;color:#888;top:10%;left:24%;">YELAHANKA</div>
+    ${pins.map(([name,status,color,top,left],i)=>`
+    <div class="bus-pin" style="top:${top};left:${left};">
+      <div class="bus-pin-row"><div class="bus-dot" style="background:${color};">${ic('bus','white',10)}</div><span class="bus-name">${name}</span></div>
+      <div class="bus-status" style="color:${color};">${status}</div>
+      ${!transport?`<div class="bus-speed">${speed[i]}</div>`:''}
+    </div>`).join('')}
+    <div class="map-toggle">
+      <button style="background:#2563eb;color:#fff;">Buses</button>
+      <button style="background:#fff;color:#64748b;">Stops</button>
+    </div>
+    <div class="map-ctrl"><button class="map-btn">+</button><button class="map-btn">−</button></div>
+    <div style="position:absolute;bottom:8px;left:10px;font-size:10px;font-weight:700;color:#9acd32;">Google</div>
+  </div>`;
+}
+
+// ─── Academics ────────────────────────────────────────────────────────────────
+function renderAcademics() {
+  const subjects = [
+    ['English','Ms. Kavya Sharma','Class 1–12','#2563eb','#dbeafe',42,88],
+    ['Mathematics','Mr. Rohan Verma','Class 1–12','#16a34a','#dcfce7',42,91],
+    ['Science','Ms. Priya Nair','Class 5–12','#7c3aed','#ede9fe',28,85],
+    ['Social Studies','Mr. Arjun Das','Class 1–10','#d97706','#fef3c7',36,78],
+    ['Hindi','Ms. Sunita Rao','Class 1–10','#dc2626','#fee2e2',36,82],
+    ['Computer Science','Mr. Vikram Iyer','Class 6–12','#0d9488','#ccfbf1',21,90],
+    ['Physical Education','Mr. Raju Pillai','Class 1–12','#ea580c','#ffedd5',42,95],
+    ['Art & Craft','Ms. Deepa Menon','Class 1–8','#be185d','#fce7f3',30,88],
+  ];
+  const timetable = {
+    days: ['Mon','Tue','Wed','Thu','Fri'],
+    periods: [
+      ['English','Mathematics','Science','Social Studies','Hindi'],
+      ['Mathematics','English','Hindi','Science','Computer Science'],
+      ['Science','Hindi','Mathematics','English','Social Studies'],
+      ['Social Studies','Computer Science','English','Mathematics','Science'],
+      ['Hindi','Science','Social Studies','Computer Science','Mathematics'],
+      ['Computer Science','Art & Craft','Physical Education','Art & Craft','Physical Education'],
+    ],
+    times: ['8:00–8:45','8:45–9:30','9:45–10:30','10:30–11:15','11:30–12:15','12:15–1:00'],
+  };
+  const subjectColors = {
+    'English':'#dbeafe','Mathematics':'#dcfce7','Science':'#ede9fe','Social Studies':'#fef3c7',
+    'Hindi':'#fee2e2','Computer Science':'#ccfbf1','Physical Education':'#ffedd5','Art & Craft':'#fce7f3',
+  };
+  const subjectText = {
+    'English':'#2563eb','Mathematics':'#16a34a','Science':'#7c3aed','Social Studies':'#d97706',
+    'Hindi':'#dc2626','Computer Science':'#0d9488','Physical Education':'#ea580c','Art & Craft':'#be185d',
+  };
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Academics</div><div class="page-sub">Manage subjects, curriculum, and class timetables for Greenwood International School.</div></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-outline">${ic('file','#64748b',14)} Download Timetable</button>
+      <button class="btn-primary">${ic('plus','white',14)} Add Subject</button>
+    </div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('book','#2563eb',20)}</div><div><div class="stat-label">Total Subjects</div><div class="stat-value">8</div><div class="stat-sub" style="color:#64748b;">Core + Electives</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('grad','#16a34a',20)}</div><div><div class="stat-label">Classes Running</div><div class="stat-value">15</div><div class="stat-sub" style="color:#64748b;">Nursery–Class 12</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#ede9fe;">${ic('users','#7c3aed',20)}</div><div><div class="stat-label">Total Teachers</div><div class="stat-value">48</div><div class="stat-sub" style="color:#64748b;">Active Faculty</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('checksq','#d97706',20)}</div><div><div class="stat-label">Avg. Performance</div><div class="stat-value">86.4%</div><div class="stat-sub" style="color:#16a34a;">↑ 2.1% this term</div></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 340px;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <!-- Subjects table -->
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Subjects &amp; Faculty</span>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" placeholder="Search subject..." style="width:180px;font-size:12px;padding:5px 9px;"/>
+            <select style="font-size:12px;padding:5px 8px;"><option>All Classes</option></select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Subject</th><th>Teacher</th><th>Classes</th><th>Periods/Week</th><th>Avg. Score</th><th>Actions</th></tr></thead>
+          <tbody>
+            ${subjects.map(([name,teacher,classes,tc,bg,periods,avg])=>`
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:${bg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${tc}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
+                <span style="font-weight:600;">${name}</span>
+              </div></td>
+              <td style="font-size:12.5px;color:#64748b;">${teacher}</td>
+              <td style="font-size:12.5px;color:#64748b;">${classes}</td>
+              <td><span style="font-weight:600;">${periods}</span> <span style="font-size:11px;color:#94a3b8;">hrs</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div class="progress-wrap" style="width:60px;"><div class="progress-fill" style="width:${avg}%;background:${tc};"></div></div>
+                  <span style="font-size:12px;font-weight:600;">${avg}%</span>
+                </div>
+              </td>
+              <td><div style="display:flex;gap:2px;">
+                <button class="icon-action">${ic('eye','#94a3b8',14)}</button>
+                <button class="icon-action">${ic('edit','#94a3b8',14)}</button>
+                <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+              </div></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <!-- Timetable (Class 5) -->
+      <div class="card cp">
+        <div class="section-hd">
+          <span class="section-title">Weekly Timetable – Class 5</span>
+          <select style="font-size:12px;padding:5px 8px;"><option>Class 5</option><option>Class 6</option><option>Class 7</option></select>
+        </div>
+        <div style="overflow-x:auto;">
+          <table style="min-width:500px;">
+            <thead><tr>
+              <th style="width:90px;">Period</th>
+              ${timetable.days.map(d=>`<th style="text-align:center;">${d}</th>`).join('')}
+            </tr></thead>
+            <tbody>
+              ${timetable.periods.map((row,i)=>`
+              <tr>
+                <td style="font-size:11px;color:#94a3b8;white-space:nowrap;">${timetable.times[i]}</td>
+                ${row.map(subj=>`<td style="padding:6px 8px;">
+                  <div style="background:${subjectColors[subj]||'#f1f5f9'};color:${subjectText[subj]||'#475569'};border-radius:6px;padding:5px 8px;font-size:11.5px;font-weight:600;text-align:center;white-space:nowrap;">${subj}</div>
+                </td>`).join('')}
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Right panel -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:12px;">Academic Calendar</div>
+        ${[
+          ['Term 1 Begins','1 Jun 2026','bg'],
+          ['Unit Test 1','15 Jul 2026','bb'],
+          ['Mid-Term Exams','18–25 Aug 2026','by'],
+          ['Unit Test 2','15 Sep 2026','bb'],
+          ['Term 1 Ends','30 Oct 2026','br'],
+          ['Term 2 Begins','1 Nov 2026','bg'],
+          ['Annual Exams','Mar 2027','bp'],
+        ].map(([ev,dt,cls])=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f8fafc;">
+          <div style="flex:1;font-size:13px;font-weight:500;">${ev}</div>
+          <span class="badge ${cls}" style="white-space:nowrap;">${dt}</span>
+        </div>`).join('')}
+      </div>
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:12px;">Term Overview</div>
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;"><span style="color:#64748b;">Current Term</span><span style="font-weight:600;">Term 1 (2026–27)</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;"><span style="color:#64748b;">Working Days</span><span style="font-weight:600;">180 days</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;"><span style="color:#64748b;">Completed</span><span style="font-weight:600;">96 days</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;"><span style="color:#64748b;">Remaining</span><span style="font-weight:600;">84 days</span></div>
+        </div>
+        <div style="margin-top:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>Term Progress</span><span style="font-weight:600;">53%</span></div>
+          <div class="progress-wrap"><div class="progress-fill" style="width:53%;background:#2563eb;"></div></div>
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button class="action-btn">${ic('plus','#2563eb',15)} Add Subject</button>
+          <button class="action-btn">${ic('edit','#7c3aed',15)} Edit Timetable</button>
+          <button class="action-btn">${ic('file','#16a34a',15)} Download Curriculum</button>
+          <button class="action-btn">${ic('send','#d97706',15)} Notify Teachers</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Attendance ────────────────────────────────────────────────────────────────
+function renderAttendance() {
+  const classes = [
+    ['Nursery','28','27','1','96.4','bg'],
+    ['LKG','32','30','2','93.8','bg'],
+    ['UKG','30','29','1','96.7','bg'],
+    ['Class 1','34','33','1','97.1','bg'],
+    ['Class 2','32','30','2','93.8','bg'],
+    ['Class 3','31','28','3','90.3','by'],
+    ['Class 4','29','27','2','93.1','bg'],
+    ['Class 5','28','26','2','92.9','bg'],
+    ['Class 6','33','31','2','93.9','bg'],
+    ['Class 7','30','27','3','90.0','by'],
+    ['Class 8','27','25','2','92.6','bg'],
+    ['Class 9','25','22','3','88.0','by'],
+    ['Class 10','22','22','0','100','bg'],
+    ['Class 11','24','22','2','91.7','bg'],
+    ['Class 12','20','19','1','95.0','bg'],
+  ];
+  const weekly = ['Mon','Tue','Wed','Thu','Fri','Mon','Tue','Wed'];
+  const wDates = ['1 Sep','2 Sep','3 Sep','4 Sep','5 Sep','8 Sep','9 Sep','Today'];
+  const wPct = [95.2,94.8,96.1,95.5,94.2,96.0,95.8,95.8];
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Attendance</div><div class="page-sub">Track daily student attendance across all classes.</div></div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <input type="date" value="2026-09-09" style="font-size:13px;padding:7px 10px;border:1px solid #e2e8f0;border-radius:8px;font-family:inherit;background:#fff;"/>
+      <button class="btn-outline">${ic('file','#64748b',14)} Export</button>
+      <button class="btn-primary">${ic('checksq','white',14)} Mark Attendance</button>
+    </div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('users','#2563eb',20)}</div><div><div class="stat-label">Total Students</div><div class="stat-value">1,248</div><div class="stat-sub" style="color:#64748b;">Enrolled</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('checkc','#16a34a',20)}</div><div><div class="stat-label">Present Today</div><div class="stat-value">1,196</div><div class="stat-sub" style="color:#16a34a;">95.8%</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fee2e2;">${ic('userx','#dc2626',20)}</div><div><div class="stat-label">Absent Today</div><div class="stat-value">52</div><div class="stat-sub" style="color:#dc2626;">4.2%</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('clock','#d97706',20)}</div><div><div class="stat-label">Late Arrivals</div><div class="stat-value">14</div><div class="stat-sub" style="color:#d97706;">1.1%</div></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;">
+    <div class="card cp">
+      <div class="section-hd">
+        <span class="section-title">Class-wise Attendance – Mon, 9 Sep 2026</span>
+        <div style="display:flex;gap:8px;">
+          <input type="text" placeholder="Search class..." style="width:140px;font-size:12px;padding:5px 9px;"/>
+          <select style="font-size:12px;padding:5px 8px;"><option>All Status</option><option>Full</option><option>Partial</option></select>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Class</th><th>Total</th><th>Present</th><th>Absent</th><th>Attendance %</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${classes.map(([cls,total,present,absent,pct,cls2])=>`
+          <tr>
+            <td style="font-weight:600;">${cls}</td>
+            <td>${total}</td>
+            <td style="color:#16a34a;font-weight:500;">${present}</td>
+            <td style="color:#dc2626;font-weight:500;">${absent}</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div class="progress-wrap" style="width:70px;"><div class="progress-fill" style="width:${pct}%;background:${parseFloat(pct)>=95?'#16a34a':parseFloat(pct)>=90?'#d97706':'#dc2626'};"></div></div>
+                <span style="font-size:12px;font-weight:600;">${pct}%</span>
+              </div>
+            </td>
+            <td><span class="badge ${cls2}">${parseFloat(pct)>=95?'Excellent':parseFloat(pct)>=90?'Good':'Needs Attention'}</span></td>
+            <td><div style="display:flex;gap:2px;">
+              <button class="icon-action" onclick="navigate('class-students','${cls}')" title="View Students">${ic('eye','#94a3b8',14)}</button>
+              <button class="icon-action">${ic('edit','#94a3b8',14)}</button>
+            </div></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <!-- Right -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <!-- Weekly trend -->
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:14px;">Weekly Attendance Trend</div>
+        <div style="display:flex;align-items:flex-end;gap:6px;height:100px;">
+          ${wPct.map((pct,i)=>`
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <span style="font-size:9px;color:#94a3b8;font-weight:600;">${pct}%</span>
+            <div style="width:100%;background:${i===7?'#2563eb':'#dbeafe'};border-radius:4px 4px 0 0;height:${Math.round((pct-88)*10)}px;min-height:4px;"></div>
+          </div>`).join('')}
+        </div>
+        <div style="display:flex;gap:6px;margin-top:6px;">
+          ${weekly.map((d,i)=>`<div style="flex:1;text-align:center;font-size:9px;color:${i===7?'#2563eb':'#94a3b8'};font-weight:${i===7?'700':'400'};">${d}<br/><span style="font-size:8px;">${wDates[i]}</span></div>`).join('')}
+        </div>
+      </div>
+      <!-- Low attendance -->
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Low Attendance Alert</span><span class="badge br">3 Students</span></div>
+        ${[
+          ['Karthik Menon','Class 5','68%'],
+          ['Priya Varma','Class 7','71%'],
+          ['Rahul Das','Class 9','73%'],
+        ].map(([name,cls,pct])=>`
+        <div style="display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid #f8fafc;">
+          <div class="ava-sm" style="background:#fee2e2;color:#dc2626;">${name[0]}</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:600;">${name}</div><div style="font-size:11px;color:#94a3b8;">${cls}</div></div>
+          <span class="badge br">${pct}</span>
+        </div>`).join('')}
+        <button class="action-btn" style="margin-top:10px;">${ic('send','#dc2626',14)} Send Notices</button>
+      </div>
+      <!-- Quick actions -->
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button class="action-btn">${ic('checksq','#2563eb',15)} Mark Today's Attendance</button>
+          <button class="action-btn">${ic('file','#16a34a',15)} Export Attendance Report</button>
+          <button class="action-btn">${ic('send','#7c3aed',15)} Send Absence Alerts</button>
+          <button class="action-btn">${ic('bar','#d97706',15)} View Monthly Report</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Results ───────────────────────────────────────────────────────────────────
+function renderResults() {
+  const exams = [
+    ['Term 1 (2026–27)','All Classes','Oct 2026','Upcoming','by'],
+    ['Unit Test 2','Class 5–12','15 Sep 2026','Scheduled','by'],
+    ['Unit Test 1','All Classes','15 Jul 2026','Completed','bg'],
+    ['Mid-Term','All Classes','18–25 Aug 2026','Completed','bg'],
+    ['Internal Assessment 1','Class 9–12','10 Jun 2026','Completed','bg'],
+  ];
+  const classPerf = [
+    ['Class 12','20','A','94.2','#16a34a'],
+    ['Class 11','24','A','91.8','#16a34a'],
+    ['Class 10','22','A–','89.5','#16a34a'],
+    ['Class 5','28','A','88.4','#2563eb'],
+    ['Class 9','25','B+','84.2','#d97706'],
+    ['Class 8','27','B+','83.6','#d97706'],
+    ['Class 7','30','B','80.1','#d97706'],
+    ['Class 6','33','B','79.8','#d97706'],
+  ];
+  const toppers = [
+    ['Aditya Kumar','Class 12','98.6%','Science'],
+    ['Sneha Gupta','Class 10','96.4%','Commerce'],
+    ['Aryan Patel','Class 11','95.8%','Science'],
+    ['Divya Sharma','Class 5','94.2%','General'],
+    ['Rohan Iyer','Class 9','93.7%','General'],
+  ];
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Results &amp; Performance</div><div class="page-sub">Manage exams, view results and track academic performance across all classes.</div></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-outline">${ic('file','#64748b',14)} Download Report</button>
+      <button class="btn-primary">${ic('plus','white',14)} Add Exam</button>
+    </div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('file','#2563eb',20)}</div><div><div class="stat-label">Total Exams</div><div class="stat-value">5</div><div class="stat-sub" style="color:#64748b;">This Academic Year</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('bar','#16a34a',20)}</div><div><div class="stat-label">School Avg. Score</div><div class="stat-value">86.4%</div><div class="stat-sub" style="color:#16a34a;">↑ 2.1% vs last term</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#ede9fe;">${ic('checkc','#7c3aed',20)}</div><div><div class="stat-label">Pass Rate</div><div class="stat-value">97.8%</div><div class="stat-sub" style="color:#16a34a;">1,220 / 1,248 students</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('grad','#d97706',20)}</div><div><div class="stat-label">Top Performers</div><div class="stat-value">124</div><div class="stat-sub" style="color:#d97706;">Scored above 90%</div></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <!-- Exam schedule -->
+      <div class="card cp">
+        <div class="section-hd">
+          <span class="section-title">Exam Schedule</span>
+          <div style="display:flex;gap:6px;" id="res-tabs">
+            ${['All','Upcoming','Completed'].map((t,i)=>`<div class="ann-tab${i===0?' active':''}" onclick="setTab(this,'res-tabs')">${t}</div>`).join('')}
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Exam Name</th><th>Classes</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            ${exams.map(([name,cls,dt,status,sc])=>`
+            <tr>
+              <td style="font-weight:600;">${name}</td>
+              <td style="font-size:12px;color:#64748b;">${cls}</td>
+              <td style="font-size:12.5px;">${dt}</td>
+              <td><span class="badge ${sc}">${status}</span></td>
+              <td><div style="display:flex;gap:4px;">
+                <button class="btn-outline" style="padding:4px 10px;font-size:11px;">${ic('eye','#2563eb',12)} View</button>
+                <button class="icon-action">${ic('edit','#94a3b8',14)}</button>
+                <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+              </div></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <!-- Class performance -->
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Class-wise Performance – Unit Test 1</span>
+          <select style="font-size:12px;padding:5px 8px;"><option>Unit Test 1</option><option>Mid-Term</option></select>
+        </div>
+        <table>
+          <thead><tr><th>Class</th><th>Students</th><th>Grade</th><th>Avg. Score</th><th>Performance</th></tr></thead>
+          <tbody>
+            ${classPerf.map(([cls,students,grade,avg,color])=>`
+            <tr>
+              <td style="font-weight:600;">${cls}</td>
+              <td>${students}</td>
+              <td><span class="badge bg" style="min-width:28px;justify-content:center;">${grade}</span></td>
+              <td style="font-weight:600;">${avg}%</td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div class="progress-wrap" style="width:90px;"><div class="progress-fill" style="width:${avg}%;background:${color};"></div></div>
+                </div>
+              </td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Right -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <!-- Top performers -->
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Top Performers</span><button class="btn-view">View All</button></div>
+        ${toppers.map(([name,cls,score,stream],i)=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f8fafc;">
+          <div style="width:22px;height:22px;border-radius:50%;background:${['#fef3c7','#f1f5f9','#ffedd5','#dbeafe','#ede9fe'][i]};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:${['#d97706','#64748b','#ea580c','#2563eb','#7c3aed'][i]};flex-shrink:0;">${i+1}</div>
+          <div class="ava-sm">${name[0]}</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:600;">${name}</div><div style="font-size:11px;color:#94a3b8;">${cls} · ${stream}</div></div>
+          <span style="font-size:13px;font-weight:700;color:#16a34a;">${score}</span>
+        </div>`).join('')}
+      </div>
+      <!-- Subject analysis -->
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:12px;">Subject-wise Average</div>
+        ${[['Mathematics','#2563eb',91],['Computer Sc.','#0d9488',90],['Hindi','#dc2626',82],['Science','#7c3aed',85],['English','#16a34a',88],['Social Std.','#d97706',78]].map(([s,c,sc])=>`
+        <div style="margin-bottom:9px;">
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px;"><span>${s}</span><span style="font-weight:600;">${sc}%</span></div>
+          <div class="progress-wrap"><div class="progress-fill" style="width:${sc}%;background:${c};"></div></div>
+        </div>`).join('')}
+      </div>
+      <!-- Quick actions -->
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button class="action-btn">${ic('plus','#2563eb',15)} Create Exam</button>
+          <button class="action-btn">${ic('file','#16a34a',15)} Generate Report Cards</button>
+          <button class="action-btn">${ic('send','#7c3aed',15)} Notify Parents</button>
+          <button class="action-btn">${ic('bar','#d97706',15)} View Analytics</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Staff & Drivers ────────────────────────────────────────────────────────────
+function renderStaff() {
+  const staffList = [
+    ['Ms. Kavya Sharma','Class Teacher – 5A','Teacher','English, Hindi','8 years','Active','bg','KS'],
+    ['Mr. Rohan Verma','Mathematics HOD','Teacher','Mathematics','12 years','Active','bg','RV'],
+    ['Ms. Priya Nair','Science Teacher','Teacher','Science','6 years','Active','bg','PN'],
+    ['Mr. Arjun Das','Social Studies','Teacher','Soc. Studies','4 years','Active','bg','AD'],
+    ['Mr. Vikram Iyer','Computer Lab','Teacher','Computer Sc.','9 years','Active','bg','VI'],
+    ['Ms. Sunita Rao','Hindi Teacher','Teacher','Hindi','11 years','On Leave','by','SR'],
+    ['Mr. Raju Pillai','PE Teacher','Teacher','Physical Ed.','7 years','Active','bg','RP'],
+    ['Ms. Anita Menon','School Librarian','Support','Library','5 years','Active','bg','AM'],
+  ];
+  const drivers = [
+    ['Ramesh K','KA-01-AB-1234','Route 1 · MG Road–Koramangala','8 years','Active','bg','9876543210'],
+    ['Suresh M','KA-01-CD-5678','Route 2 · Yelahanka–Hebbal','6 years','Active','bg','9876543211'],
+    ['Ajay P','KA-01-EF-9012','Route 3 · Whitefield–ITPL','4 years','Active','bg','9876543212'],
+    ['Manoj S','KA-01-GH-3456','Route 4 · Marathahalli–Brookefield','3 years','On Duty','by','9876543213'],
+    ['Vijay L','KA-01-IJ-7890','Route 5 · HSR Layout–BTM','7 years','Active','bg','9876543214'],
+  ];
+  const [activeTab, setStaffTab] = [0, ()=>{}]; // placeholder
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Staff &amp; Drivers</div><div class="page-sub">Manage teaching staff, support personnel, and bus drivers.</div></div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-outline">${ic('file','#64748b',14)} Export</button>
+      <button class="btn-primary">${ic('plus','white',14)} Add Staff</button>
+    </div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('users','#2563eb',20)}</div><div><div class="stat-label">Total Staff</div><div class="stat-value">66</div><div class="stat-sub" style="color:#64748b;">All Personnel</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('book','#16a34a',20)}</div><div><div class="stat-label">Teachers</div><div class="stat-value">48</div><div class="stat-sub" style="color:#64748b;">Active Faculty</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#ede9fe;">${ic('users','#7c3aed',20)}</div><div><div class="stat-label">Support Staff</div><div class="stat-value">13</div><div class="stat-sub" style="color:#64748b;">Admin + Ops</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('bus','#d97706',20)}</div><div><div class="stat-label">Drivers</div><div class="stat-value">5</div><div class="stat-sub" style="color:#d97706;">All Active</div></div></div>
+  </div>
+  <!-- Tabs -->
+  <div style="display:flex;border-bottom:1px solid #e2e8f0;margin-bottom:14px;" id="staff-tabs">
+    ${['Teaching Staff','Support Staff','Drivers'].map((t,i)=>`<div class="ann-tab${i===0?' active':''}" onclick="setTab(this,'staff-tabs')">${t}</div>`).join('')}
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <!-- Teaching Staff -->
+      <div class="card cp">
+        <div class="section-hd">
+          <span class="section-title">Teaching Staff</span>
+          <div style="display:flex;gap:8px;">
+            <input type="text" placeholder="Search staff..." style="width:160px;font-size:12px;padding:5px 9px;"/>
+            <select style="font-size:12px;padding:5px 8px;"><option>All Departments</option></select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Name</th><th>Designation</th><th>Type</th><th>Subjects</th><th>Experience</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            ${staffList.map(([name,desg,type,subj,exp,status,sc,initials])=>`
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:9px;">
+                <div class="ava-sm" style="background:#dbeafe;color:#2563eb;">${initials}</div>
+                <div style="font-weight:600;">${name}</div>
+              </div></td>
+              <td style="font-size:12px;color:#64748b;">${desg}</td>
+              <td><span class="badge bb">${type}</span></td>
+              <td style="font-size:12px;color:#64748b;">${subj}</td>
+              <td style="font-size:12.5px;">${exp}</td>
+              <td><span class="badge ${sc}">${status}</span></td>
+              <td><div style="display:flex;gap:2px;">
+                <button class="icon-action">${ic('eye','#94a3b8',14)}</button>
+                <button class="icon-action">${ic('edit','#94a3b8',14)}</button>
+                <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+              </div></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0 0;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:12.5px;color:#64748b;">Showing 1–8 of 48 staff</span>
+          <div style="display:flex;gap:4px;"><button class="pg-btn">‹</button><button class="pg-btn active">1</button><button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">›</button></div>
+        </div>
+      </div>
+      <!-- Drivers -->
+      <div class="card cp">
+        <div class="section-hd"><span class="section-title">Bus Drivers</span><button class="btn-primary" style="padding:6px 12px;font-size:12px;">${ic('plus','white',13)} Add Driver</button></div>
+        <table>
+          <thead><tr><th>Driver Name</th><th>Bus Number</th><th>Route</th><th>Experience</th><th>Status</th><th>Contact</th><th>Actions</th></tr></thead>
+          <tbody>
+            ${drivers.map(([name,bus,route,exp,status,sc,phone])=>`
+            <tr>
+              <td><div style="display:flex;align-items:center;gap:9px;">
+                <div class="ava-sm" style="background:#fef3c7;color:#d97706;">${name[0]}</div>
+                <span style="font-weight:600;">${name}</span>
+              </div></td>
+              <td style="font-size:12px;color:#64748b;">${bus}</td>
+              <td style="font-size:12px;color:#64748b;">${route}</td>
+              <td style="font-size:12.5px;">${exp}</td>
+              <td><span class="badge ${sc}">${status}</span></td>
+              <td style="font-size:12.5px;">${phone}</td>
+              <td><div style="display:flex;gap:2px;">
+                <button class="icon-action" onclick="navigate('transport')">${ic('bus','#2563eb',14)}</button>
+                <button class="icon-action">${ic('edit','#94a3b8',14)}</button>
+                <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+              </div></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Right -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:12px;">Department Overview</div>
+        ${[
+          ['Languages','#2563eb',12,'bg'],['Science','#16a34a',8,'bg'],
+          ['Mathematics','#7c3aed',6,'bg'],['Social Studies','#d97706',5,'bg'],
+          ['Computer Sc.','#0d9488',4,'bg'],['PE & Arts','#ea580c',7,'bg'],
+          ['Administration','#64748b',6,'bgr'],
+        ].map(([dept,color,count,cls])=>`
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f8fafc;">
+          <div style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;"></div>
+          <div style="flex:1;font-size:13px;">${dept}</div>
+          <span class="badge ${cls}">${count} Staff</span>
+        </div>`).join('')}
+      </div>
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Today's Attendance</div>
+        ${[['Teaching Staff','46/48','bg'],['Support Staff','12/13','bg'],['Drivers','5/5','bg']].map(([type,ratio,cls])=>`
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f8fafc;">
+          <span style="font-size:13px;">${type}</span>
+          <span class="badge ${cls}">${ratio} Present</span>
+        </div>`).join('')}
+      </div>
+      <div class="card cp">
+        <div class="section-title" style="margin-bottom:10px;">Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button class="action-btn">${ic('plus','#2563eb',15)} Add Staff Member</button>
+          <button class="action-btn">${ic('send','#7c3aed',15)} Send Staff Notice</button>
+          <button class="action-btn">${ic('file','#16a34a',15)} Download Staff List</button>
+          <button class="action-btn">${ic('checksq','#d97706',15)} Mark Staff Attendance</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── Reports ────────────────────────────────────────────────────────────────────
+function renderReports() {
+  const reportTypes = [
+    ['Attendance Report','Daily, weekly and monthly attendance records for all classes.','checksq','#2563eb','#dbeafe'],
+    ['Results Report','Exam results, grade sheets and performance analytics.','bar','#7c3aed','#ede9fe'],
+    ['Transport Report','Bus routes, driver logs and student transport records.','bus','#16a34a','#dcfce7'],
+    ['Fee Report','Fee collection, pending dues and payment history.','file','#d97706','#fef3c7'],
+    ['Staff Report','Teacher profiles, attendance and performance summaries.','users','#ea580c','#ffedd5'],
+    ['Student Report','Class-wise student data, demographics and progress.','grad','#0d9488','#ccfbf1'],
+  ];
+  const recentReports = [
+    ['Attendance Report – August 2026','Generated 1 Sep 2026','PDF','3.2 MB','bg'],
+    ['Results – Unit Test 1','Generated 20 Aug 2026','PDF','5.8 MB','bg'],
+    ['Transport Summary – Aug 2026','Generated 31 Aug 2026','XLSX','1.1 MB','bg'],
+    ['Fee Collection Report Q1','Generated 15 Aug 2026','PDF','2.4 MB','bg'],
+    ['Staff Attendance – August','Generated 1 Sep 2026','PDF','0.9 MB','bg'],
+    ['Student Demographics 2026','Generated 5 Jun 2026','XLSX','4.2 MB','bg'],
+  ];
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Reports</div><div class="page-sub">Generate, download and share comprehensive school reports.</div></div>
+    <button class="btn-primary">${ic('plus','white',14)} Custom Report</button>
+  </div>
+  <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="stat-card"><div class="stat-icon" style="background:#dbeafe;">${ic('file','#2563eb',20)}</div><div><div class="stat-label">Total Reports</div><div class="stat-value">128</div><div class="stat-sub" style="color:#64748b;">This Academic Year</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#dcfce7;">${ic('checkc','#16a34a',20)}</div><div><div class="stat-label">Generated This Month</div><div class="stat-value">24</div><div class="stat-sub" style="color:#16a34a;">Sep 2026</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#ede9fe;">${ic('send','#7c3aed',20)}</div><div><div class="stat-label">Shared with Parents</div><div class="stat-value">18</div><div class="stat-sub" style="color:#64748b;">This month</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fef3c7;">${ic('clock','#d97706',20)}</div><div><div class="stat-label">Scheduled Reports</div><div class="stat-value">6</div><div class="stat-sub" style="color:#d97706;">Auto-generate</div></div></div>
+  </div>
+  <!-- Report cards -->
+  <div style="margin-bottom:20px;">
+    <div class="section-hd" style="margin-bottom:14px;"><span class="section-title">Generate Report</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      ${reportTypes.map(([title,desc,icn,color,bg])=>`
+      <div class="card cp" style="cursor:pointer;transition:border-color .15s,box-shadow .15s;" onmouseover="this.style.borderColor='${color}';this.style.boxShadow='0 2px 12px rgba(0,0,0,.08)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:${bg};display:flex;align-items:center;justify-content:center;">${ic(icn,color,20)}</div>
+          <div style="font-size:14px;font-weight:600;">${title}</div>
+        </div>
+        <div style="font-size:12.5px;color:#64748b;margin-bottom:12px;line-height:1.5;">${desc}</div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn-primary" style="flex:1;justify-content:center;padding:7px;font-size:12px;">${ic('file','white',13)} Generate PDF</button>
+          <button class="btn-outline" style="padding:7px 10px;font-size:12px;">XLSX</button>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <!-- Recent reports -->
+  <div class="card cp">
+    <div class="section-hd">
+      <span class="section-title">Recent Reports</span>
+      <div style="display:flex;gap:8px;">
+        <input type="text" placeholder="Search reports..." style="width:180px;font-size:12px;padding:5px 9px;"/>
+        <select style="font-size:12px;padding:5px 8px;"><option>All Types</option></select>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Report Name</th><th>Generated</th><th>Format</th><th>Size</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${recentReports.map(([name,gen,fmt,size,sc])=>`
+        <tr>
+          <td><div style="display:flex;align-items:center;gap:8px;">${ic('file','#64748b',16)}<span style="font-weight:600;">${name}</span></div></td>
+          <td style="font-size:12px;color:#64748b;">${gen}</td>
+          <td><span class="badge bgr">${fmt}</span></td>
+          <td style="font-size:12.5px;color:#64748b;">${size}</td>
+          <td><span class="badge ${sc}">Ready</span></td>
+          <td><div style="display:flex;gap:4px;">
+            <button class="btn-outline" style="padding:4px 10px;font-size:11px;">${ic('eye','#2563eb',12)} View</button>
+            <button class="btn-outline" style="padding:4px 10px;font-size:11px;">${ic('send','#64748b',12)} Share</button>
+            <button class="icon-action">${ic('more','#94a3b8',14)}</button>
+          </div></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0 0;flex-wrap:wrap;gap:8px;">
+      <span style="font-size:12.5px;color:#64748b;">Showing 1–6 of 128 reports</span>
+      <div style="display:flex;gap:4px;"><button class="pg-btn">‹</button><button class="pg-btn active">1</button><button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">›</button></div>
+    </div>
+  </div>`;
+}
+
+// ─── Settings ──────────────────────────────────────────────────────────────────
+function renderSettings() {
+  return `
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+    <div><div class="page-title">Settings</div><div class="page-sub">Manage school profile, academic year, notifications, and user accounts.</div></div>
+    <button class="btn-primary">${ic('checkc','white',14)} Save Changes</button>
+  </div>
+  <div style="display:grid;grid-template-columns:200px 1fr;gap:20px;">
+    <!-- Settings nav -->
+    <div class="card cp" style="align-self:start;">
+      <div style="display:flex;flex-direction:column;gap:2px;" id="settings-nav">
+        ${[
+          ['general','home','General'],
+          ['academic','book','Academic Year'],
+          ['notif','bell','Notifications'],
+          ['users','users','Users & Roles'],
+          ['security','shield','Security'],
+          ['integrations','settings','Integrations'],
+        ].map(([id,icn,lbl],i)=>`
+        <button class="nav-item${i===0?' active':''}" style="background:${i===0?'#eff6ff':'none'};color:${i===0?'#2563eb':'#64748b'};padding:9px 10px;border-radius:8px;font-size:13px;"
+          onclick="switchSettings(this,'${id}-panel')">${ic(icn,i===0?'#2563eb':'#64748b',15)} ${lbl}</button>`).join('')}
+      </div>
+    </div>
+    <!-- Panels -->
+    <div>
+      <!-- General -->
+      <div id="general-panel" class="settings-panel">
+        <div class="card cp" style="margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:16px;">School Profile</div>
+          <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+            <div style="width:80px;height:80px;background:#dcfce7;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;">🏫</div>
+            <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:280px;">
+              ${[
+                ['School Name','Greenwood International School'],
+                ['Principal','Dr. Ananya Rao'],
+                ['Board','CBSE'],
+                ['Affiliation No.','1234567'],
+                ['Founded','1998'],
+                ['Total Capacity','1,500 Students'],
+              ].map(([lbl,val])=>`
+              <div>
+                <label style="font-size:12px;color:#64748b;display:block;margin-bottom:4px;">${lbl}</label>
+                <input type="text" value="${val}" style="width:100%;"/>
+              </div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="card cp" style="margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:16px;">Contact Information</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            ${[
+              ['Address','#102, Greenwood Road, Koramangala, Bengaluru – 560034'],
+              ['Phone','+91 80 1234 5678'],
+              ['Email','admin@greenwoodschool.edu.in'],
+              ['Website','www.greenwoodschool.edu.in'],
+            ].map(([lbl,val])=>`
+            <div>
+              <label style="font-size:12px;color:#64748b;display:block;margin-bottom:4px;">${lbl}</label>
+              <input type="text" value="${val}" style="width:100%;"/>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div class="card cp">
+          <div class="section-title" style="margin-bottom:16px;">Working Hours</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+            ${[['School Opens','8:00 AM'],['School Closes','3:30 PM'],['Working Days','Mon – Sat']].map(([lbl,val])=>`
+            <div>
+              <label style="font-size:12px;color:#64748b;display:block;margin-bottom:4px;">${lbl}</label>
+              <input type="text" value="${val}" style="width:100%;"/>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <!-- Academic Year -->
+      <div id="academic-panel" class="settings-panel" style="display:none;">
+        <div class="card cp" style="margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:16px;">Current Academic Year</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            ${[['Academic Year','2026–27'],['Term 1 Start','1 Jun 2026'],['Term 1 End','31 Oct 2026'],['Term 2 Start','1 Nov 2026'],['Term 2 End','31 Mar 2027'],['Total Working Days','180']].map(([lbl,val])=>`
+            <div>
+              <label style="font-size:12px;color:#64748b;display:block;margin-bottom:4px;">${lbl}</label>
+              <input type="text" value="${val}" style="width:100%;"/>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div class="card cp">
+          <div class="section-hd" style="margin-bottom:14px;"><span class="section-title">Holidays &amp; Events</span><button class="btn-primary" style="padding:6px 12px;font-size:12px;">${ic('plus','white',13)} Add Holiday</button></div>
+          <table>
+            <thead><tr><th>Event</th><th>Date</th><th>Type</th><th>Actions</th></tr></thead>
+            <tbody>
+              ${[
+                ['Independence Day','15 Aug 2026','National Holiday','by'],
+                ['Ganesh Chaturthi','25 Aug 2026','Festival Holiday','bo'],
+                ['Gandhi Jayanti','2 Oct 2026','National Holiday','by'],
+                ['Dussehra','2 Oct 2026','Festival Holiday','bo'],
+                ['Diwali','20 Oct 2026','Festival Holiday','bo'],
+                ['Christmas','25 Dec 2026','Festival Holiday','bb'],
+              ].map(([ev,dt,type,cls])=>`
+              <tr>
+                <td style="font-weight:600;">${ev}</td>
+                <td style="font-size:12.5px;color:#64748b;">${dt}</td>
+                <td><span class="badge ${cls}">${type}</span></td>
+                <td><div style="display:flex;gap:2px;"><button class="icon-action">${ic('edit','#94a3b8',14)}</button><button class="icon-action">${ic('more','#94a3b8',14)}</button></div></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Notifications -->
+      <div id="notif-panel" class="settings-panel" style="display:none;">
+        <div class="card cp" style="margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:16px;">Notification Preferences</div>
+          ${[
+            ['Attendance Alerts','Send daily attendance summary to parents','Parents & Staff'],
+            ['Bus Delay Alerts','Notify parents when bus is delayed by 10+ mins','Parents'],
+            ['Exam Reminders','Send exam schedule reminders 3 days before','Students & Parents'],
+            ['Fee Reminders','Send fee due date reminders to parents','Parents'],
+            ['Announcement Emails','Email all announcements to subscribers','Everyone'],
+            ['Low Attendance Warning','Alert when student attendance falls below 75%','Parents & Admin'],
+          ].map(([title,desc,audience])=>`
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f1f5f9;">
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:600;">${title}</div>
+              <div style="font-size:12px;color:#64748b;margin-top:2px;">${desc}</div>
+              <div style="font-size:11px;color:#94a3b8;margin-top:2px;">Audience: ${audience}</div>
+            </div>
+            <label style="position:relative;display:inline-block;width:40px;height:22px;flex-shrink:0;margin-left:16px;">
+              <input type="checkbox" checked style="opacity:0;width:0;height:0;position:absolute;">
+              <span style="position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#2563eb;border-radius:34px;transition:.3s;">
+                <span style="position:absolute;content:'';height:16px;width:16px;left:21px;bottom:3px;background:white;border-radius:50%;"></span>
+              </span>
+            </label>
+          </div>`).join('')}
+        </div>
+      </div>
+      <!-- Users -->
+      <div id="users-panel" class="settings-panel" style="display:none;">
+        <div class="card cp">
+          <div class="section-hd" style="margin-bottom:14px;"><span class="section-title">User Accounts</span><button class="btn-primary" style="padding:6px 12px;font-size:12px;">${ic('plus','white',13)} Add User</button></div>
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Last Login</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              ${[
+                ['Dr. Ananya Rao','ananya@greenwood.edu.in','Principal','9 Sep 2026, 8:04 AM','Active'],
+                ['Mr. Rohan Verma','rohan@greenwood.edu.in','HOD – Maths','9 Sep 2026, 7:58 AM','Active'],
+                ['Ms. Kavya Sharma','kavya@greenwood.edu.in','Class Teacher','8 Sep 2026, 4:30 PM','Active'],
+                ['Mr. Suresh Admin','suresh@greenwood.edu.in','Admin Staff','7 Sep 2026, 11:00 AM','Active'],
+                ['Ms. Deepa Menon','deepa@greenwood.edu.in','Librarian','5 Sep 2026, 2:15 PM','Inactive'],
+              ].map(([name,email,role,login,status])=>`
+              <tr>
+                <td><div style="display:flex;align-items:center;gap:9px;"><div class="ava-sm">${name[0]}</div><span style="font-weight:600;">${name}</span></div></td>
+                <td style="font-size:12px;color:#64748b;">${email}</td>
+                <td><span class="badge bb">${role}</span></td>
+                <td style="font-size:12px;color:#64748b;">${login}</td>
+                <td><span class="badge ${status==='Active'?'bg':'br'}">${status}</span></td>
+                <td><div style="display:flex;gap:2px;"><button class="icon-action">${ic('edit','#94a3b8',14)}</button><button class="icon-action">${ic('more','#94a3b8',14)}</button></div></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Security -->
+      <div id="security-panel" class="settings-panel" style="display:none;">
+        <div class="card cp" style="margin-bottom:14px;">
+          <div class="section-title" style="margin-bottom:16px;">Security Settings</div>
+          ${[
+            ['Two-Factor Authentication','Require OTP for all admin logins',true],
+            ['Session Timeout','Auto-logout after 30 minutes of inactivity',true],
+            ['Login Alerts','Email notification on new device login',false],
+            ['IP Whitelisting','Restrict access to approved IP addresses only',false],
+          ].map(([title,desc,enabled])=>`
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f1f5f9;">
+            <div><div style="font-size:13px;font-weight:600;">${title}</div><div style="font-size:12px;color:#64748b;margin-top:2px;">${desc}</div></div>
+            <label style="position:relative;display:inline-block;width:40px;height:22px;flex-shrink:0;margin-left:16px;">
+              <input type="checkbox" ${enabled?'checked':''} style="opacity:0;width:0;height:0;position:absolute;">
+              <span style="position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:${enabled?'#2563eb':'#e2e8f0'};border-radius:34px;">
+                <span style="position:absolute;height:16px;width:16px;${enabled?'left:21px':'left:3px'};bottom:3px;background:white;border-radius:50%;"></span>
+              </span>
+            </label>
+          </div>`).join('')}
+        </div>
+        <div class="card cp">
+          <div class="section-title" style="margin-bottom:14px;">Change Password</div>
+          <div style="display:grid;grid-template-columns:1fr;gap:10px;max-width:360px;">
+            ${['Current Password','New Password','Confirm New Password'].map(lbl=>`
+            <div><label style="font-size:12px;color:#64748b;display:block;margin-bottom:4px;">${lbl}</label>
+            <input type="password" value="••••••••" style="width:100%;"/></div>`).join('')}
+            <button class="btn-primary" style="width:fit-content;">Update Password</button>
+          </div>
+        </div>
+      </div>
+      <!-- Integrations -->
+      <div id="integrations-panel" class="settings-panel" style="display:none;">
+        <div class="card cp">
+          <div class="section-title" style="margin-bottom:16px;">Connected Integrations</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            ${[
+              ['📧','Email (SMTP)','Configured','bg','Send automated emails'],
+              ['📱','SMS Gateway','Configured','bg','Parent notifications via SMS'],
+              ['💳','Payment Gateway','Connected','bg','Online fee collection'],
+              ['🗺️','Google Maps','Active','bg','Live bus tracking'],
+              ['📊','Google Sheets','Not Connected','br','Export data to Sheets'],
+              ['🔔','Push Notifications','Not Connected','br','Mobile app alerts'],
+            ].map(([emoji,name,status,cls,desc])=>`
+            <div class="card" style="padding:14px;display:flex;align-items:center;gap:12px;">
+              <div style="font-size:28px;">${emoji}</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;">${name}</div>
+                <div style="font-size:11px;color:#64748b;margin-top:2px;">${desc}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                <span class="badge ${cls}">${status}</span>
+                <button class="btn-outline" style="padding:3px 10px;font-size:11px;">${status.includes('Not')?'Connect':'Manage'}</button>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function switchSettings(el, panelId) {
+  document.querySelectorAll('.settings-panel').forEach(p => p.style.display='none');
+  document.getElementById(panelId).style.display='block';
+  document.querySelectorAll('#settings-nav .nav-item').forEach(b => {
+    b.style.background='none'; b.style.color='#64748b';
+    b.querySelectorAll('svg').forEach(s => s.style.stroke='#64748b');
+  });
+  el.style.background='#eff6ff'; el.style.color='#2563eb';
+}
+
+// ─── Tab helper ─────────────────────────────────────────────────────────────
+function setTab(el, groupId) {
+  document.querySelectorAll(`#${groupId} .${el.className.split(' ')[0]}`).forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── Build content ──────────────────────────────────────────────────────────
+const content = document.getElementById('content');
+content.innerHTML = `
+  <div id="page-dashboard" class="page active">${renderDashboard()}</div>
+  <div id="page-transport" class="page">${renderTransport()}</div>
+  <div id="page-students" class="page">${renderStudents()}</div>
+  <div id="page-class-students" class="page"></div>
+  <div id="page-student-profile" class="page"></div>
+  <div id="page-announcements" class="page">${renderAnnouncements()}</div>
+  <div id="page-academics" class="page">${renderAcademics()}</div>
+  <div id="page-attendance" class="page">${renderAttendance()}</div>
+  <div id="page-results" class="page">${renderResults()}</div>
+  <div id="page-staff" class="page">${renderStaff()}</div>
+  <div id="page-reports" class="page">${renderReports()}</div>
+  <div id="page-settings" class="page">${renderSettings()}</div>
+`;
+</script>
+</body>
+</html>
